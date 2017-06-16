@@ -4,7 +4,7 @@
 var EasyLoading = (function () {
 
     function EasyLoading() {
-        this.__super.call(this);
+        EasyLoading.__super.call(this);
         this._content = null;
         this._uiImageContainer = null;
         this._timeKey = null;

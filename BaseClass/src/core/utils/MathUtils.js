@@ -4,7 +4,7 @@
 var MathUtils = (function () {
 
     function MathUtils() {
-        this.__super.call(this);
+        MathUtils.__super.call(this);
     }
 
     Laya.class(MathUtils, "MathUtils", BaseClass);

@@ -4,7 +4,7 @@
 var EffectUtils = (function () {
 
     function EffectUtils() {
-        this.__super.call(this);
+        EffectUtils.__super.call(this);
     }
 
     Laya.class(EffectUtils, "EffectUtils", BaseClass);

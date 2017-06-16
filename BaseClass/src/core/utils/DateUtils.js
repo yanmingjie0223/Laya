@@ -4,7 +4,7 @@
 var DateUtils = (function () {
 
     function DateUtils() {
-        this.__super.call(this);
+        DateUtils.__super.call(this);
     }
 
     Laya.class(DateUtils, "DateUtils", BaseClass);
@@ -12,7 +12,7 @@ var DateUtils = (function () {
 
     /**
      * 1 格式化时间获取 00:00:00
-     * @param 时间戳 {number}
+     * @param 时间戳差 {number}
      */
     _proto_.formatTime = function (time) {
         var str = "";

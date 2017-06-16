@@ -10,6 +10,24 @@ var App = (function () {
     var _getset_ = Laya.getset;
 
     /**
+     * 游戏socket
+     */
+    _getset_(1, App, "Socket",
+        function(){
+            return GameSocket.getInstance(gameSocketConfig);
+        }
+    );
+
+    /**
+     * 消息控制中心
+     */
+    _getset_(1, App, "MessageCenter",
+        function(){
+            return MessageCenter.getInstance();
+        }
+    );
+
+    /**
      * 单例音乐控制类型
      */
     _getset_(1, App, "AudioManager",

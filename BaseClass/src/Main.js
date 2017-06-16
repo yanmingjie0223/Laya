@@ -67,11 +67,12 @@ Laya.loader.load("res/atlas/comp.json", Handler.create(this, onAssetLoaded), nul
 
 function onAssetLoaded()
 {
-	Tip.showTip("haha");
-	var preAsset = new Promise(function(resolve, reject) {
-		Tip.showTip("haha2");
-        Laya.stage.addChild(new TestUI());
-    });
+	// Tip.showTip("haha");
+	// var preAsset = new Promise(function(resolve, reject) {
+	// 	Tip.showTip("haha2");
+    //     Laya.stage.addChild(new TestUI());
+    // });
+	Laya.stage.addChild(new TestUI());
 	// var md5 = new MD5();
 	// Logger.trace(md5.encrypt("abc"));
 }

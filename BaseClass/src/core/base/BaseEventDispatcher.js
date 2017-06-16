@@ -1,18 +1,18 @@
 /*
 * name;
 */
-var BaseClass = (function () {
+var BaseEventDispatcher = (function () {
 
-    function BaseClass() {
-        
+    function BaseEventDispatcher() {
+        BaseEventDispatcher.__super.call(this);
     }
 
-    Laya.class(BaseClass, "BaseClass");
+    Laya.class(BaseEventDispatcher, "BaseEventDispatcher", Laya.EventDispatcher);
 
     /**
      * 获取单例
      */
-    BaseClass.getInstance = function () {
+    BaseEventDispatcher.getInstance = function () {
         var args = arguments;
         var Class = this;
         if (!Class._instance) {
@@ -44,5 +44,5 @@ var BaseClass = (function () {
         return Class._instance;
     }
 
-    return BaseClass;
+    return BaseEventDispatcher;
 }());

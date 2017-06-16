@@ -4,7 +4,7 @@
 var CommonUtils = (function () {
 
     function CommonUtils() {
-        this.__super.call(this);
+        CommonUtils.__super.call(this);
     }
 
     Laya.class(CommonUtils, "CommonUtils", BaseClass);
@@ -24,9 +24,9 @@ var CommonUtils = (function () {
     /**
      * 深度复制
      * @param {any}
-     * @param {any}
+     * @return {any}
      */
-    _proto_.copyObj = function(obj) {
+    _proto_.copyData = function(obj) {
         var newObj;
         if (obj instanceof Array) {
             newObj = [];
@@ -38,7 +38,7 @@ var CommonUtils = (function () {
         var keys = Object.keys(obj);
         for (var i = 0, len = keys.length; i < len; i++) {
             var key = keys[i];
-            newObj[key] = this.copyObj(obj[key]);
+            newObj[key] = this.copyData(obj[key]);
         }
         return newObj;
     }
@@ -63,7 +63,7 @@ var CommonUtils = (function () {
     /**
      * int64转number
      * @param obj {any}
-     * @returns {number}
+     * @return {number}
      */
     _proto_.int64ToNumber = function(obj) {
         return parseInt(obj.toString());

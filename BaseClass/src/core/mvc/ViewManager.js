@@ -4,7 +4,7 @@
 var ViewManager = (function () {
 
     function ViewManager() {
-        this.__super.call(this);
+        ViewManager.__super.call(this);
         this._views = {};
         this._opens = {};
     }

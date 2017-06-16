@@ -4,7 +4,7 @@
 var DebugUtils = (function () {
 
     function DebugUtils() {
-        this.__super.call(this);
+        DebugUtils.__super.call(this);
         this._isDebug = false;
     }
 

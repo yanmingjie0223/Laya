@@ -4,7 +4,7 @@
 var ControllerManager = (function () {
 
     function ControllerManager() {
-        this.__super.call(this);
+        ControllerManager.__super.call(this);
         //BaseController 模块控制类
         this._modules = {};
     }

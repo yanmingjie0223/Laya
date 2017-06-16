@@ -4,7 +4,7 @@
 var SceneManager = (function () {
 
     function SceneManager() {
-        this.__super.call(this);
+        SceneManager.__super.call(this);
         this._scenes = {};
         this._currScene = null;
     }

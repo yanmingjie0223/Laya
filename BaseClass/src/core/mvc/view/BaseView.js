@@ -9,7 +9,7 @@ var BaseView = (function () {
      * @param parent {Laya.Sprite}
      */
     function BaseView(controller, parent) {
-        this.__super.call(this);
+        BaseView.__super.call(this);
         //父级
         this.myParent = parent;
 

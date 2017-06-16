@@ -4,7 +4,7 @@
 var ArrayUtils = (function () {
 
     function ArrayUtils() {
-        this.__super.call(this);
+        ArrayUtils.__super.call(this);
     }
 
     Laya.class(ArrayUtils, "ArrayUtils", BaseClass);

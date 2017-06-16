@@ -4,7 +4,7 @@
 var DisplayUtils = (function () {
 
     function DisplayUtils() {
-        this.__super.call(this);
+        DisplayUtils.__super.call(this);
     }
 
     Laya.class(DisplayUtils, "DisplayUtils", BaseClass);

@@ -4,7 +4,7 @@
 var Tip = (function () {
 
     function Tip() {
-        this.__super.call(this);
+        Tip.__super.call(this);
         this._msgTF = null;
         this._bg = null;
         this.initView();

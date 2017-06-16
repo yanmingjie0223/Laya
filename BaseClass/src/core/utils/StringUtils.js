@@ -4,7 +4,7 @@
 var StringUtils = (function () {
 
     function StringUtils() {
-        this.__super.call(this);
+        StringUtils.__super.call(this);
     }
 
     Laya.class(StringUtils, "StringUtils", BaseClass);

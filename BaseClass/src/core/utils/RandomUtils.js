@@ -4,7 +4,7 @@
 var RandomUtils = (function () {
 
     function RandomUtils() {
-        this.__super.call(this);
+        RandomUtils.__super.call(this);
     }
 
     Laya.class(RandomUtils, "RandomUtils", BaseClass);

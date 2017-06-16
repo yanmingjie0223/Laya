@@ -4,7 +4,7 @@
 var AudioManager = (function () {
 
     function AudioManager() {
-        this.__super.call(this);
+        AudioManager.__super.call(this);
 
         this._isMute = false;
 
@@ -13,9 +13,6 @@ var AudioManager = (function () {
 
         this._volumeBg = 1;
         this._volumeEffect = 1;
-
-        this._autoStopMusic = true;
-        this.playbackRate
 
         this.initData();
         this.save();

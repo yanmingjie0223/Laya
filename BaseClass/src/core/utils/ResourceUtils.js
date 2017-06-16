@@ -4,7 +4,7 @@
 var ResourceUtils = (function () {
 
     function ResourceUtils() {
-        this.__super.call(this);
+        ResourceUtils.__super.call(this);
     }
 
     Laya.class(ResourceUtils, "ResourceUtils", BaseClass);

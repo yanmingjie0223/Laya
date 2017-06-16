@@ -3,14 +3,14 @@
  */
 var BaseSocket = (function() {
 
-    function BaseSocket (options) {
-        this.__super.call(this);
+    function BaseSocket(options) {
+        BaseSocket.__super.call(this);
         this.primus = null;
         this.data = {
             _commKey       : null,  //res加密公钥所用到的key
             token          : null,  //玩家token，在连接初始化时用于res生成公钥
             jwtToken       : null,  //res加密之后的玩家token，数据交互以此token为主
-            publicKey      : null,  //res公钥   
+            publicKey      : null,  //res公钥
             connectionUrl  : null,  //连接url
             encryptedString: null,  //res加密后的验证字符串
             isOpened       : false  //连接是否已经初始化过
@@ -18,7 +18,7 @@ var BaseSocket = (function() {
         Object.assign(this.data, options);
         this.init();
     }
-    Laya.class(BaseSocket, "BaseSocket", Laya.EventDispatcher);
+    Laya.class(BaseSocket, "BaseSocket", BaseEventDispatcher);
     var _super_ = BaseSocket.__super.prototype;
     var _proto_ = BaseSocket.prototype;
 
@@ -97,7 +97,7 @@ var BaseSocket = (function() {
         }
         Logger.trace("%c 接收到数据：", parsedData.cmd, parsedData);
         //更新jwt token
-        if (parsedData.cmd == self.cmd.CONN_INIT) {
+        if (parsedData.cmd == "conn:init") {
             self.data.jwtToken = parsedData.rep;
         } else {
             self.event(parsedData.cmd, parsedData.rep);

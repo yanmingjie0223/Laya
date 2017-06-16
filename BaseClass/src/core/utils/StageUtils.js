@@ -4,7 +4,7 @@
 var StageUtils = (function () {
 
     function StageUtils() {
-        this.__super.call(this);
+        StageUtils.__super.call(this);
     }
 
     Laya.class(StageUtils, "StageUtils", BaseClass);

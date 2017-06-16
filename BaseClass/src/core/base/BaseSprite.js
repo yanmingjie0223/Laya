@@ -1,18 +1,18 @@
 /*
 * name;
 */
-var BaseClass = (function () {
+var BaseSprite = (function () {
 
-    function BaseClass() {
-        
+    function BaseSprite() {
+        BaseSprite.__super.call(this);
     }
 
-    Laya.class(BaseClass, "BaseClass");
+    Laya.class(BaseSprite, "BaseSprite", Laya.Sprite);
 
     /**
      * 获取单例
      */
-    BaseClass.getInstance = function () {
+    BaseEventDispatcher.getInstance = function () {
         var args = arguments;
         var Class = this;
         if (!Class._instance) {
@@ -44,5 +44,5 @@ var BaseClass = (function () {
         return Class._instance;
     }
 
-    return BaseClass;
+    return BaseSprite;
 }());
