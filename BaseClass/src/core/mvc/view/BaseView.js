@@ -6,33 +6,23 @@ var BaseView = (function () {
     /**
      * 构造函数
      * @param controller {BaseController}
-     * @param parent {Laya.Sprite}
      */
-    function BaseView(controller, parent) {
+    function BaseView(controller) {
         BaseView.__super.call(this);
-        //父级
-        this.myParent = parent;
-
-        this.isInit = false;
+        this._isInit = false;
         this._controller = controller;
         this._resouce = null;
+        //初始化这个view需要的资源
+        this.initRes();
 
         App.StageUtils.getStage().on(Laya.Event.RESIZE, this, this.onResize);
     }
 
-    Laya.class(BaseClass, "BaseClass", Laya.Sprite);
+    Laya.class(BaseView, "BaseView", BaseSprite);
     var _proto_ = BaseView.prototype;
     var _super_ = BaseView.__super.prototype;
     var _getset_ = Laya.getset;
-
-    /**
-     * 子类继承必须实现，赋值加载资源
-     * @param [{url: , type: }]
-     */
-    _proto_.setResources = function(resource){
-        this._resouce = resource;
-    }
-
+   
     /**
      * 触发本模块消息
      * @param key 唯一标识 {any}
@@ -53,33 +43,18 @@ var BaseView = (function () {
     }
 
     /**
-     * 面板是否显示
-     * @return {boolen}
+     * 子类继承必须实现，赋值加载资源
+     * @param [{url: , type: }]
      */
-    _proto_.isShow = function() {
-        return this.stage != null && this.visible;
-    }
+    _proto_.initRes = function(){
 
-    /**
-     * 添加到父级
-     */
-    _proto_.addToParent = function() {
-        if(this.destroyed) return;
-        this.myParent.addChild(this);
-    }
-
-    /**
-     * 从父级移除
-     */
-    _proto_.removeFromParent = function() {
-        App.DisplayUtils.removeFromParent(this);
     }
 
     /**
      * 对面板进行显示初始化，用于子类继承
      */
     _proto_.initView = function() {
-        this.isInit = true;
+        
     }
 
     /**
@@ -91,10 +66,18 @@ var BaseView = (function () {
 
     /**
      * 面板开启执行函数，用于子类继承
+     * @param 场景
+     * @param 居中处理
      * @param ...param:any[]
      */
-    _proto_.open = function(){
-
+    _proto_.show = function(scene, center){
+        (center === void 0) && (center = false);
+        //该view界面居中情况        
+        if (center) {
+            this.x = (App.StageUtils.stageW - this.width) / 2;
+            this.y = (App.StageUtils.stageH - this.height) / 2;
+        }
+        scene.addView(this);
     }
 
     /**
@@ -102,7 +85,7 @@ var BaseView = (function () {
      * @param ...param:any[]
      */
     _proto_.close = function() {
-
+        this.removeSelf();
     }
 
     /**
@@ -113,19 +96,33 @@ var BaseView = (function () {
     }
 
     /**
-     * 加载面板所需资源
-     * @param loadComplete {function}
-     * @param initComplete {function}
+     * 获取view窗口级别
      */
-    _proto_.loadResource = function(loadComplete, initComplete) {
-        if (this._resources && this._resources.length > 0) {
-            App.ResourceUtils.loadResource(this._resources, function () {
-                loadComplete();
-                initComplete();
-            }, null, this);
-        }else {
-            loadComplete();
-            initComplete();
+    _proto_.getLayer = function(){
+        return ViewType.LAYER_WINDOW;
+    }
+
+    /**
+     * 加载面板所需资源
+     * @param callback {function}
+     * @param thisObj {any}
+     */
+    _proto_.loadResource = function(callback, thisObj) {
+        var self = this;
+        if(!self.resouce || self.resouce.length <= 0){
+            return;
+        }
+        App.EasyLoading.show();
+        if(!self.isInit){
+            App.ResourceUtils.loadResource(self.resouce, function () {
+                self.isInit = true;
+                self.initView();
+                App.EasyLoading.close();
+                (callback) && (callback.call(thisObj));
+            }, null, self);
+        }else{
+            App.EasyLoading.close();
+            (callback) && (callback.call(thisObj));
         }
     }
 
@@ -133,8 +130,7 @@ var BaseView = (function () {
      * 摧毁view
      */
     _proto_.destroy = function(){
-        this.myParent = null;
-        this.isInit = false;
+        this._isInit = false;
         this._resouce = null;
         this._controller = null;
         App.StageUtils.getStage().off(Laya.Event.RESIZE, this, this.onResize);
@@ -150,18 +146,6 @@ var BaseView = (function () {
     }
 
     /**
-     * 获取设置父级
-     */
-    _getset_(0, _proto_, "myParent",
-        function(){
-            return this._myParent;
-        },
-        function(value){
-            this._myParent = value
-        }
-    );
-
-    /**
      * 获取设置是否初始化
      */
     _getset_(0, _proto_, "isInit",
@@ -170,6 +154,18 @@ var BaseView = (function () {
         },
         function(value){
             this._isInit = value
+        }
+    );
+
+    /**
+     * 获取设置是否初始化
+     */
+    _getset_(0, _proto_, "resouce",
+        function(){
+            return this._resouce;
+        },
+        function(value){
+            this._resouce = value
         }
     );
 

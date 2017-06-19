@@ -10,6 +10,15 @@ var App = (function () {
     var _getset_ = Laya.getset;
 
     /**
+     * 场景控制
+     */
+    _getset_(1, App, "SceneManager",
+        function(){
+            return SceneManager.getInstance();
+        }
+    );
+
+    /**
      * 游戏socket
      */
     _getset_(1, App, "Socket",

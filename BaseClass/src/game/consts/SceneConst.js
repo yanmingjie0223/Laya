@@ -3,7 +3,10 @@
 */
 var SceneConst = (function () {
     
-    SceneConst.HALL = 1000;
+    SceneConst.HOME = 1000;
+
+    function SceneConst(){}
+    Laya.class(SceneConst, "SceneConst");
 
     return SceneConst;
 }());

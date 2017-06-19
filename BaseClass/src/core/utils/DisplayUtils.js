@@ -128,6 +128,35 @@ var DisplayUtils = (function () {
         return tx;
     }
 
+    /**创建一个按钮
+     * @param xPos x坐标     {number}
+     * @param yPos y坐标     {number}
+     * @param textureUrl 纹理地址  {string}
+     * @param text 文本内容 {string}
+     * @param labelSize 文本size  {number}
+     * @param width 宽     {number}
+     * @param height 高 {number}
+     * @param parent 父容器   {Sprite}
+     * @return {Laya.Button}
+     * */
+    _proto_.createButton = function(xPos, yPos, textureUrl, text, labelSize, width, height, parent){
+        (parent === void 0) && (parent = null);
+        (height === void 0) && (height = null);
+        (width === void 0) && (width = null);
+        (labelSize === void 0) && (labelSize = null);
+        (text === void 0) && (text = "");
+        var btn = new Laya.Button(textureUrl, text);
+        (height != null) && (btn.height = height);
+        (width != null) && (btn.width = width);
+        (labelSize != null) && (btn.labelSize = labelSize);
+        btn.label = text;
+        btn.pos(xPos, yPos);
+        if(parent){
+            parent.addChild(btn);
+        }
+        return btn;
+    }
+
     /**
      * 创建骨骼动画
      * @param png图片集地址

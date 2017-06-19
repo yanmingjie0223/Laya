@@ -26,7 +26,7 @@ var CommonUtils = (function () {
      * @param {any}
      * @return {any}
      */
-    _proto_.copyData = function(obj) {
+    _proto_.copy = function(obj) {
         var newObj;
         if (obj instanceof Array) {
             newObj = [];
@@ -38,7 +38,7 @@ var CommonUtils = (function () {
         var keys = Object.keys(obj);
         for (var i = 0, len = keys.length; i < len; i++) {
             var key = keys[i];
-            newObj[key] = this.copyData(obj[key]);
+            newObj[key] = this.copy(obj[key]);
         }
         return newObj;
     }

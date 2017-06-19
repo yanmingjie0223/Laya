@@ -92,7 +92,7 @@ var MessageCenter = (function () {
      */
     _proto_.dealMsg = function(msgVo) {
         var cmd = msgVo.cmd;
-        var param = App.CommonUtils.copyData(msgVo.param);
+        var param = App.CommonUtils.copy(msgVo.param);
         var listeners = this.dict[cmd];
         var i = 0;
         var len = listeners.length;
@@ -143,7 +143,7 @@ var MessageVo = (function(){
             return this._param;
         },
         function(value){
-            this._param = App.CommonUtils.copyData(value);;
+            this._param = App.CommonUtils.copy(value);;
         }
     );
 

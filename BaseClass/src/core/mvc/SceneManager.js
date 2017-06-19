@@ -3,6 +3,10 @@
 */
 var SceneManager = (function () {
 
+    /**回退类型*/
+    SceneManager.NO_BACK = 0;
+    SceneManager.BACK = 1;
+
     function SceneManager() {
         SceneManager.__super.call(this);
         this._scenes = {};
@@ -59,6 +63,18 @@ var SceneManager = (function () {
      */
     _proto_.getCurrScene = function() {
         return this._currScene;
+    }
+
+    /**
+     * 获取scene
+     * @param 场景唯一标识
+     */
+    _proto_.getScene = function(key){
+        var scene = this._scenes[key];
+        if(scene){
+            return scene;
+        }
+        return null;
     }
 
     return SceneManager;

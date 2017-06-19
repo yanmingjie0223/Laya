@@ -31,7 +31,7 @@ var BaseSocket = (function() {
     };
 
     _proto_.setUrl = function(url) {
-      this.data.connectionUrl = url;
+        this.data.connectionUrl = url;
     };
 
     _proto_.connect = function() {
@@ -163,7 +163,7 @@ var BaseSocket = (function() {
             this.keyCount = this.keyCount? this.keyCount+1: 0;
             // Logger.trace("初始化可以次数", this.keyCount);
             this.data._commKey = Date.parse(new Date()).toString() + Date.parse(new Date()).toString() + Date.parse(new Date()).toString().substring(0, 6);
-    } catch (e) {
+        } catch (e) {
             Logger.trace("初始化commKey失败", e);
         }
     };
