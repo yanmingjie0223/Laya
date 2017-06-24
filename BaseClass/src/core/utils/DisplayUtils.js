@@ -98,19 +98,18 @@ var DisplayUtils = (function () {
      * @param yPos y坐标           {number}
      * @param fontUrl配置文件      {string}
      * @param fontPngUrl纹理地址   {string}
+     * @param fontName   {string}
      * @param parent 父容器        {Sprite}
      * @param width 文本宽度       {number}
      * @param textAlign 对齐方式   {string}
      * @return {Laya.Text}
      * */
-    _proto_.createBitmapText = function (xPos, yPos, fontUrl, fontPngUrl, parent, width, align) {
+    _proto_.createBitmapText = function (xPos, yPos, fontUrl, fontPngUrl, fontName, parent, width, align) {
         (parent === void 0) && (parent = null);
         (width === void 0) && (width = 0);
         (align === void 0) && (align = Laya.Stage.ALIGN_CENTER);
         //注册font字体到Text中
-        var bitmapFont = new Laya.BitmapFont();
-        bitmapFont.parseFont(Laya.Loader.getRes(fontUrl), Laya.Loader.getRes(fontPngUrl));
-        Laya.Text.registerBitmapFont(fontName, bitmapFont);
+        App.FontManager.register(fontUrl, fontPngUrl, fontName);
 
         var tx = new Laya.Text();
         tx.pos(xPos, yPos);
@@ -225,7 +224,6 @@ var DisplayUtils = (function () {
      * @param child {Laya.Sprite}
      */
     _proto_.removeFromParent = function(child) {
-        if (!child.parent) return;
         child.removeSelf();
     }
 

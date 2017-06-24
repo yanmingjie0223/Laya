@@ -74,6 +74,7 @@ var SceneManager = (function () {
         if(scene){
             return scene;
         }
+        Logger.log(key + "场景不存在！");
         return null;
     }
 

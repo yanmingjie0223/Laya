@@ -14,8 +14,9 @@ var BaseFloatView = (function () {
     var _super_ = BaseFloatView.__super.prototype;
     var _getset_ = Laya.getset;
 
-    _proto_.show = function(scene, center){
-        (center === void 0) && (arguments[1] = true);
+    _proto_.show = function(center, scene){
+        (center === void 0) && (arguments[0] = true);
+        (scene === void 0) && (arguments[1] = null);
         _super_.show.call(this, arguments);
         this.parent.addChildAt(this.bg, this.parent.getChildIndex(this));
         this.bg.pos(0, 0);

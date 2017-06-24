@@ -83,5 +83,18 @@ var ControllerManager = (function () {
         return null;
     }
 
+    /**
+     * 获取指定Controller对象
+     * @param controllerKey Controller唯一标识 {any}
+     * @returns {BaseController}
+     */
+    _proto_.getController = function(controllerKey){
+        var manager = this._modules[controllerKey];
+        if (manager) {
+            return manager;
+        }
+        return null;
+    }
+
     return ControllerManager;
 }());

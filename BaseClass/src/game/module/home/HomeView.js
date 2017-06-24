@@ -3,8 +3,8 @@
 */
 var HomeView = (function () {
 
-    function HomeView(controller) {
-        HomeView.__super.call(this, controller);
+    function HomeView(controller, scene) {
+        HomeView.__super.apply(this, arguments);
         this.btn = null;
         this.btn2 = null;
         this.btn3 = null;
@@ -22,7 +22,7 @@ var HomeView = (function () {
         this.resouce = res;
     }
 
-    _proto_.show = function(scene){
+    _proto_.show = function(){
         _super_.show.apply(this, arguments);
         this.loadResource();
     }

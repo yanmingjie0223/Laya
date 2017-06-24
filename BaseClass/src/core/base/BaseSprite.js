@@ -8,6 +8,16 @@ var BaseSprite = (function () {
     }
 
     Laya.class(BaseSprite, "BaseSprite", Laya.Sprite);
+    var _super_ = BaseSprite.__super.prototype;
+    var _proto_ = BaseSprite.prototype;
+
+    /**
+     * 添加子对象，如果该view被摧毁不添加
+     */
+    _proto_.addChild = function(node){
+        if(this.destroyed) return;
+        _super_.addChild.apply(this, arguments);
+    }
 
     /**
      * 获取单例

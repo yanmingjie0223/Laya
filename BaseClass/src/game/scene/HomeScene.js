@@ -9,13 +9,24 @@ var HomeScene = (function () {
 
     Laya.class(HomeScene, "HomeScene", BaseScene);
     var _proto_ = HomeScene.prototype;
+    var _super_ = HomeScene.__super.prototype;
 
     /**
      * 进入Scene调用
      */
     _proto_.onEnter = function() {
-        App.StageUtils.getStage().addChild(this);
+        _super_.onEnter.call(this);
+        //注册控制类
         App.ControllerManager.register(ControllerConst.HOME, new HomeController());
+        //控制显示view
+        App.ControllerManager.getController(ControllerConst.HOME).show();
+    }
+
+    /**
+     * 退出Scene调用
+     */
+    _proto_.onExit = function() {
+        _super_.onExit.call(this);
     }
 
     return HomeScene;

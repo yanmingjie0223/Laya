@@ -6,11 +6,13 @@ var BaseView = (function () {
     /**
      * 构造函数
      * @param controller {BaseController}
+     * @param scene {BaseScene}
      */
-    function BaseView(controller) {
+    function BaseView(controller, scene) {
         BaseView.__super.call(this);
-        this._isInit = false;
         this._controller = controller;
+        this._scene = scene;
+        this._isInit = false;
         this._resouce = null;
         //初始化这个view需要的资源
         this.initRes();
@@ -66,18 +68,22 @@ var BaseView = (function () {
 
     /**
      * 面板开启执行函数，用于子类继承
-     * @param 场景
      * @param 居中处理
+     * @param 场景如果不需要更换指定场景，传值为null
      * @param ...param:any[]
      */
-    _proto_.show = function(scene, center){
+    _proto_.show = function(center, scene){
         (center === void 0) && (center = false);
+        (scene === void 0) && (scene = null);
         //该view界面居中情况        
         if (center) {
             this.x = (App.StageUtils.stageW - this.width) / 2;
             this.y = (App.StageUtils.stageH - this.height) / 2;
         }
-        scene.addView(this);
+        if(scene){
+            this._scene = scene;
+        }
+        this._scene.addView(this);
     }
 
     /**
@@ -85,7 +91,11 @@ var BaseView = (function () {
      * @param ...param:any[]
      */
     _proto_.close = function() {
-        this.removeSelf();
+        if(this._scene){
+            this._scene.removeView(this);
+        }else{
+            this.removeSelf();
+        }
     }
 
     /**
@@ -136,15 +146,7 @@ var BaseView = (function () {
         App.StageUtils.getStage().off(Laya.Event.RESIZE, this, this.onResize);
         _super_.destroy.call(this);
     }
-
-    /**
-     * 添加子对象，如果该view被摧毁不添加
-     */
-    _proto_.addChild = function(node){
-        if(this.destroyed) return;
-        _super_.addChild.call(this, node);
-    }
-
+    
     /**
      * 获取设置是否初始化
      */
@@ -166,6 +168,18 @@ var BaseView = (function () {
         },
         function(value){
             this._resouce = value
+        }
+    );
+
+    /**
+     * 获取view界面场景
+     */
+    _getset_(0, _proto_, "scene",
+        function(){
+            return this._scene;
+        },
+        function(value){
+            this._scene = value
         }
     );
 

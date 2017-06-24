@@ -79,11 +79,18 @@ var EffectUtils = (function () {
     }
 
     /**
-     * 停止动画
+     * 停止动画所有动画后容器位置初始化到原位，否则可能出现位置改变的bug
      * @param obj {Sprite}
+     * @param xPos {number}
+     * @param yPos {number}
      */
-    _proto_.stopEffect = function(obj) {
+    _proto_.stopEffect = function(obj, xPos, yPos) {
+        (yPos === void 0) && (yPos = null);
+        (xPos === void 0) && (xPos = null);
         Laya.Tween.clearAll(obj);
+        if(xPos !== null && yPos !== null){
+            obj.pos(xPos, yPos);
+        }
     }
 
     return EffectUtils;
