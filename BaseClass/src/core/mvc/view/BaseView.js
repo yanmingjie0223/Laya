@@ -30,8 +30,8 @@ var BaseView = (function () {
      * @param key 唯一标识 {any}
      * @param ...param:any[]
      */
-    _proto_.applyFunc = function(key) {
-        return this._controller.applyFunc.apply(this._controller, arguments);
+    _proto_.dispatch = function(key) {
+        return this._controller.dispatch.apply(this._controller, arguments);
     }
 
     /**
@@ -40,8 +40,8 @@ var BaseView = (function () {
      * @param key 唯一标识 {any}
      * @param ...param:any[]
      */
-    _proto_.applyControllerFunc = function(controllerKey, key) {
-        return this._controller.applyControllerFunc.apply(this._controller, arguments);
+    _proto_.dispatchController = function(controllerKey, key) {
+        return this._controller.dispatchController.apply(this._controller, arguments);
     }
 
     /**
@@ -137,7 +137,7 @@ var BaseView = (function () {
     }
 
     /**
-     * 摧毁view
+     * 摧毁
      */
     _proto_.destroy = function(){
         this._isInit = false;

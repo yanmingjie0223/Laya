@@ -18,8 +18,27 @@ var SceneManager = (function () {
 
     /**
      * 清空处理
+     * @param key Scene唯一标识 {any}
      */
-    _proto_.clear = function() {
+    _proto_.clear = function(key) {
+        var isCurr = false;
+        if(key == this._currScene){
+            isCurr = true;
+        }
+        var scene = this._scenes[key];
+        if(scene){
+            if(isCurr){
+                scene.onExit();
+                this._currScene = null;
+            }
+            delete this._scenes[key];
+        }
+    }
+
+    /**
+     * 清理所有
+     */
+    _proto_.clearAll = function() {
         var nowScene = this._scenes[this._currScene];
         if(nowScene){
             nowScene.onExit();
@@ -35,6 +54,16 @@ var SceneManager = (function () {
      */
     _proto_.register = function(key, scene) {
         this._scenes[key] = scene;
+    }
+
+    /**
+     * 注销Scene
+     * @param key Scene唯一标识 {any}
+     */
+    _proto_.unregister = function(key) {
+        if(this._scenes && this._scenes[key]){
+            delete this._scenes[key];
+        }
     }
 
     /**

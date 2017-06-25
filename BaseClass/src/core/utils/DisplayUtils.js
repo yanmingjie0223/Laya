@@ -134,7 +134,7 @@ var DisplayUtils = (function () {
      * @param text 文本内容 {string}
      * @param labelSize 文本size  {number}
      * @param width 宽     {number}
-     * @param height 高 {number}
+     * @param height 高    {number}
      * @param parent 父容器   {Sprite}
      * @return {Laya.Button}
      * */
@@ -224,6 +224,7 @@ var DisplayUtils = (function () {
      * @param child {Laya.Sprite}
      */
     _proto_.removeFromParent = function(child) {
+        if(!child) return;
         child.removeSelf();
     }
 

@@ -16,10 +16,12 @@ var HomeScene = (function () {
      */
     _proto_.onEnter = function() {
         _super_.onEnter.call(this);
+
         //注册控制类
         App.ControllerManager.register(ControllerConst.HOME, new HomeController());
+
         //控制显示view
-        App.ControllerManager.getController(ControllerConst.HOME).show();
+        App.ViewManager.show(ViewConst.HOME);
     }
 
     /**

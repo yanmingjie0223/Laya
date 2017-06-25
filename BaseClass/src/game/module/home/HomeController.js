@@ -18,12 +18,11 @@ var HomeController = (function () {
 
     _proto_.init = function(){
         this.homeScene = App.SceneManager.getScene(SceneConst.HOME);
-        this.homeView = new HomeView(this, this.homeScene);
-        this.homeProxy = new BaseProxy(this);
-    }
 
-    _proto_.show = function(){
-        this.homeView.show();
+        this.homeView = new HomeView(this, this.homeScene);
+        App.ViewManager.register(ViewConst.HOME, this.homeView);
+
+        this.homeProxy = new BaseProxy(this);
     }
 
     return HomeController;

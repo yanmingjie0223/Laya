@@ -3,7 +3,7 @@
 */
 var BaseFloatView = (function () {
 
-    function BaseFloatView(controller) {
+    function BaseFloatView(controller, scene) {
         BaseFloatView.__super.apply(this, arguments);
         this._bg = null;
         this._bgAlpha = 0.3;

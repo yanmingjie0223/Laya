@@ -22,12 +22,12 @@ var ControllerManager = (function () {
     /**
      * 动态添加的Controller
      * @param controllerKey 唯一标识 {any}
-     * @param control {BaseController}
+     * @param controller {BaseController}
      */
-    _proto_.register = function(controllerKey, control) {
+    _proto_.register = function(controllerKey, controller) {
         if (this.isExists(controllerKey))
             return;
-        this._modules[controllerKey] = control;
+        this._modules[controllerKey] = controller;
     }
 
     /**
@@ -56,14 +56,14 @@ var ControllerManager = (function () {
      * @param key 消息唯一标识 {any}
      * @param ...param:any[]
      */
-    _proto_.applyFunc = function(controllerKey, key){
-        var manager = this._modules[controllerKey];
-        if (manager) {
+    _proto_.dispatchController = function(controllerKey, key){
+        var controller = this._modules[controllerKey];
+        if (controller) {
             var params = [];
             for (var i = 1; i < arguments.length; i++) {
                 params[i - 1] = arguments[i];
             }
-            return manager.applyFunc.apply(manager, params);
+            return controller.dispatch.apply(controller, params);
         } else {
             Logger.trace("模块" + controllerKey + "不存在");
             return null;
@@ -89,9 +89,9 @@ var ControllerManager = (function () {
      * @returns {BaseController}
      */
     _proto_.getController = function(controllerKey){
-        var manager = this._modules[controllerKey];
-        if (manager) {
-            return manager;
+        var controller = this._modules[controllerKey];
+        if (controller) {
+            return controller;
         }
         return null;
     }

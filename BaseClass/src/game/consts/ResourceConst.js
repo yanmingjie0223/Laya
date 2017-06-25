@@ -3,9 +3,10 @@
 */
 var ResourceConst = (function () {
 
-    function ResourceConst() {}
-
     ResourceConst["ITME"] = "itme";
 
+    function ResourceConst() {}
+    Laya.class(ResourceConst, "ResourceConst");
+    
     return ResourceConst;
 }());

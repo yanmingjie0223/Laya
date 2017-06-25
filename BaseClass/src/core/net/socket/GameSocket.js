@@ -16,7 +16,7 @@ var GameSocket = (function () {
      */
     _proto_.event = function(cmd, data){
         _super_.event.apply(this, arguments);
-        App.MessageCenter.dispatch(cmd, data);
+        App.MessageCenter.dispatch.apply(App.MessageCenter, arguments);
     }
 
     return GameSocket;

@@ -17,8 +17,18 @@ var BaseController = (function () {
      * @param callback 侦听函数  {function}
      * @param thisObj 侦听函数所属对象 {any}
      */
-    _proto_.registerFunc = function(key, callback, thisObj){
+    _proto_.addListener = function(key, callback, thisObj){
         this._messages[key] = [callback, thisObj];
+    }
+
+    /**
+     * 注销本模块消息
+     * @param key 唯一标识    {any}
+     */
+    _proto_.removeListener = function(key){
+        if(this._messages && this._messages[key]){
+            delete this._messages[key]
+        }
     }
 
     /**
@@ -26,7 +36,7 @@ var BaseController = (function () {
      * @param key 唯一标识 {any}
      * @param ...param:any[]
      */
-    _proto_.applyFunc = function(key) {
+    _proto_.dispatch = function(key) {
         var listen = this._messages[key];
         if (listen) {
             var params = [];
@@ -46,8 +56,8 @@ var BaseController = (function () {
      * @param key 唯一标识  {any}
      * @param ...param:any[]
      */
-    _proto_.applyControllerFunc = function(controllerKey, key) {
-        return App.ControllerManager.applyFunc.apply(App.ControllerManager, arguments);
+    _proto_.dispatchController = function(controllerKey, key) {
+        return App.ControllerManager.dispatchController.apply(App.ControllerManager, arguments);
     }
 
     /**

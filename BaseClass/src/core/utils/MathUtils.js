@@ -90,7 +90,7 @@ var MathUtils = (function () {
     _proto_.getDistance = function(p1, p2) {
         var disX = p2.x - p1.x;
         var disY = p2.y - p1.y;
-        var disQ = disX * disX + disY * disY;
+        var disQ = Math.pow(disX, 2) + Math.pow(disY, 2);
         return Math.sqrt(disQ);
     }
 

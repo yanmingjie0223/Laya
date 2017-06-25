@@ -11,7 +11,7 @@ var RandomUtils = (function () {
     var _proto_ = RandomUtils.prototype;
 
     /**
-     * 获取一个区间的随机数
+     * 获取一个区间的随机数 (from, end)
      * @param from 最小值 {number}
      * @param end 最大值 {number}
      * @returns {number}
@@ -21,16 +21,6 @@ var RandomUtils = (function () {
         end = Math.max(from, end);
         var range = end - from;
         return from + Math.random() * range;
-    }
-
-    /**
-     * 获取一个区间的随机数(帧数)
-     * @param from 最小值 {number}
-     * @param end 最大值 {number}
-     * @returns {number}
-     */
-    _proto_.limitInteger = function(from, end) {
-        return Math.round(this.limit(from, end));
     }
 
     /**

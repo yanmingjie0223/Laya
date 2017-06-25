@@ -19,6 +19,15 @@ var App = (function () {
     );
 
     /**
+     * view控制
+     */
+    _getset_(1, App, "ViewManager",
+        function(){
+            return ViewManager.getInstance();
+        }
+    );
+
+    /**
      * 场景控制
      */
     _getset_(1, App, "SceneManager",
@@ -28,20 +37,20 @@ var App = (function () {
     );
 
     /**
-     * 游戏socket
-     */
-    _getset_(1, App, "Socket",
-        function(){
-            return GameSocket.getInstance(gameSocketConfig);
-        }
-    );
-
-    /**
      * 消息控制中心
      */
     _getset_(1, App, "MessageCenter",
         function(){
             return MessageCenter.getInstance();
+        }
+    );
+
+    /**
+     * 游戏socket
+     */
+    _getset_(1, App, "Socket",
+        function(){
+            return GameSocket.getInstance(gameSocketConfig);
         }
     );
 

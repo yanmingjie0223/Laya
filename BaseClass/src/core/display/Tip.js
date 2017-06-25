@@ -22,15 +22,12 @@ var Tip = (function () {
         (_parent === void 0) && (_parent = null);
         var tip = new Tip();
         tip.showTip(_str, _parent);
-        setTimeout(function(){
-            tip.close();
-        }, 1200);
+        setTimeout(tip.close.bind(tip), 1200);
     }
 
     _proto_.showTip = function(_str, _parent){
         this._msgTF.text = _str;
-        var w;
-        var h;
+        var w, h;
         if(this._bg.source){
             w = this._bg.width;
             h = this._bg.height;

@@ -19,8 +19,8 @@ var BaseProxy = (function () {
      * @param key 唯一标识 {any}
      * @param ...param:any[]
      */
-    _proto_.applyFunc = function(key) {
-        return this._controller.applyFunc.apply(this._controller, arguments);
+    _proto_.dispatch = function(key) {
+        return this._controller.dispatch.apply(this._controller, arguments);
     }
 
     /**
@@ -29,8 +29,8 @@ var BaseProxy = (function () {
      * @param key 唯一标识 {any}
      * @param ...param:any[]
      */
-    _proto_.applyControllerFunc = function(controllerKey, key) {
-        return this._controller.applyControllerFunc.apply(this._controller, arguments);
+    _proto_.dispatchController = function(controllerKey, key) {
+        return this._controller.dispatchController.apply(this._controller, arguments);
     }
 
     /**
@@ -39,7 +39,7 @@ var BaseProxy = (function () {
      * @param callback 处理函数 {function}
      * @param thisObj 处理函数所属对象 {any}
      */
-    _proto_.receiveServerMsg = function(cmd, callback, thisObj) {
+    _proto_.addListener = function(cmd, callback, thisObj) {
         App.MessageCenter.addListener(cmd, callback, thisObj);
     }
 
@@ -49,12 +49,12 @@ var BaseProxy = (function () {
      * @param callbackFunc 处理函数 {function}
      * @param callbackObj 处理函数所属对象 {any}
      */
-    _proto_.receiveServerMsgOnce = function(cmd, callbackFunc, callbackObj) {
+    _proto_.addListenerOnce = function(cmd, callbackFunc, callbackObj) {
         var callback = function() {
-            this.removeServerMsg(cmd, callback, this);
+            this.removeListener(cmd, callback, this);
             callbackFunc.apply(callbackObj, arguments);
         }
-        this.receiveServerMsg(cmd, callback, this);
+        this.addListener(cmd, callback, this);
     }
 
     /**
@@ -63,7 +63,7 @@ var BaseProxy = (function () {
      * @param callbackFunc 处理函数 {function}
      * @param callbackObj 处理函数所属对象 {any}
      */
-    _proto_.removeServerMsg = function(cmd, callbackFunc, callbackObj) {
+    _proto_.removeListener = function(cmd, callbackFunc, callbackObj) {
         App.MessageCenter.removeListener(cmd, callbackFunc, callbackObj);
     }
 
