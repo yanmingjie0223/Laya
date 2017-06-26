@@ -54,7 +54,7 @@ var DisplayUtils = (function () {
         if (textureUrl) {
             image.texture = Laya.loader.getRes(textureUrl);
             if (!image.texture) {
-                this.imageToTexture(textureUrl, image.texture, image);
+                this.imageToTexture(textureUrl, image);
             }
         }
         image.pos(xPos, yPos);
@@ -80,7 +80,7 @@ var DisplayUtils = (function () {
         if (textureUrl) {
             image.source = Laya.loader.getRes(textureUrl);
             if(!image.source){
-                this.imageToTexture(textureUrl, image.source, image);
+                this.imageToTexture(textureUrl, image);
             }
         }
         image.pos(xPos, yPos);
@@ -207,16 +207,27 @@ var DisplayUtils = (function () {
       * @param 赋值纹理对象
       * @param image对象（显示纹理容器）
       */
-    _proto_.imageToTexture = function(textureUrl, texture, image){
-        texture = Laya.loader.getRes(textureUrl);
-        if(!texture){
-            this.imageUrlLoad(textureUrl, function(){
-                texture = Laya.loader.getRes(textureUrl);
-                if (texture && !image.destroyed) {
-                    image.size(texture.width, texture.height);
-                }
-            }, null)
+    _proto_.imageToTexture = function(textureUrl, image){
+        if(image instanceof Laya.Image){
+            image.source = Laya.loader.getRes(textureUrl);
+            if(!image.source){
+                this.imageUrlLoad(textureUrl, function(){
+                    image.source = Laya.loader.getRes(textureUrl);
+                    if (image.source && !image.destroyed) {
+                        image.size(image.source.width, image.source.height);
+                    }
+                }, null);
+            }else if(image instanceof Laya.Sprite){
+                image.texture = Laya.loader.getRes(textureUrl);
+                this.imageUrlLoad(textureUrl, function(){
+                    image.texture = Laya.loader.getRes(textureUrl);
+                    if (image.texture && !image.destroyed) {
+                        image.size(image.texture.width, image.texture.height);
+                    }
+                }, null);
+            }
         }
+        
     }
 
     /**
