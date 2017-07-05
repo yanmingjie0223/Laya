@@ -13,6 +13,22 @@ var DisplayUtils = (function () {
     /**创建一个文本
      * @param xPos x坐标     {number}
      * @param yPos y坐标     {number}
+     * @param parent 父容器  {Sprite}
+     * @return {Laya.Sprite}
+     * */
+    _proto_.createSprite = function (xPos, yPos, parent) {
+        (parent === void 0) && (parent = null);
+        var sprite = new Laya.Sprite();
+        sprite.pos(xPos, yPos);
+        if (parent) {
+            parent.addChild(sprite);
+        }
+        return sprite;
+    }
+
+    /**创建一个文本
+     * @param xPos x坐标     {number}
+     * @param yPos y坐标     {number}
      * @param size 字号      {number}
      * @param width 文本宽度 {number}
      * @param parent 父容器  {Sprite}
@@ -59,7 +75,7 @@ var DisplayUtils = (function () {
         }
         image.pos(xPos, yPos);
         if (image.texture) {
-            image.size(image.texture.width, image.texture.height);
+            image.size(image.texture.sourceWidth, image.texture.sourceHeight);
         }
         if (parent) {
             parent.addChild(image);
@@ -85,7 +101,7 @@ var DisplayUtils = (function () {
         }
         image.pos(xPos, yPos);
         if (image.source) {
-            image.size(image.source.width, image.source.height);
+            image.size(image.source.sourceWidth, image.source.sourceHeight);
         }
         if (parent) {
             parent.addChild(image);
@@ -213,21 +229,23 @@ var DisplayUtils = (function () {
             if(!image.source){
                 this.imageUrlLoad(textureUrl, function(){
                     image.source = Laya.loader.getRes(textureUrl);
-                    if (image.source && !image.destroyed) {
-                        image.size(image.source.width, image.source.height);
-                    }
-                }, null);
-            }else if(image instanceof Laya.Sprite){
-                image.texture = Laya.loader.getRes(textureUrl);
-                this.imageUrlLoad(textureUrl, function(){
-                    image.texture = Laya.loader.getRes(textureUrl);
-                    if (image.texture && !image.destroyed) {
-                        image.size(image.texture.width, image.texture.height);
+                    if (!image.destroyed && image.source) {
+                        image.size(image.source.sourceWidth, image.source.sourceHeight);
                     }
                 }, null);
             }
         }
-        
+        else if(image instanceof Laya.Sprite){
+            image.texture = Laya.loader.getRes(textureUrl);
+            if(!image.texture) {
+                this.imageUrlLoad(textureUrl, function(){
+                image.texture = Laya.loader.getRes(textureUrl);
+                    if (!image.destroyed && image.texture) {
+                        image.size(image.texture.sourceWidth, image.texture.sourceHeight);
+                    }
+                }, null);
+            }
+        }
     }
 
     /**
