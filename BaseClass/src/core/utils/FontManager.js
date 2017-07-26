@@ -18,7 +18,7 @@ var FontManager = (function () {
      * @param fontName   {string}
      */
     _proto_.register = function(fontUrl, fontPngUrl, fontName){
-        if(!this._fontCache || this._fontCache[fontName]){
+        if(this._fontCache && this._fontCache[fontName]){
             return;
         }
 
