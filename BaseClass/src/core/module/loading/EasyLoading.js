@@ -20,6 +20,7 @@ var EasyLoading = (function () {
         self._content = new Laya.Sprite();
         self._content.graphics.drawRect(0, 0, App.StageUtils.stageW, App.StageUtils.stageH, "#000000");
         self._content.size(App.StageUtils.stageW, App.StageUtils.stageH);
+        self._content.mouseEnabled = true;
         self._content.alpha = 0.3;
 
         self._uiImageContainer = new Laya.Sprite();
