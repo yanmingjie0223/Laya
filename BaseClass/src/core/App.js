@@ -10,6 +10,15 @@ var App = (function () {
     var _getset_ = Laya.getset;
 
     /**
+     * 生成获取类
+     */
+    _getset_(1, App, "ClassManager",
+        function () {
+            return ClassManager.getInstance();
+        }
+    );
+
+    /**
      * font字体注册
      */
     _getset_(1, App, "FontManager",
