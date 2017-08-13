@@ -144,7 +144,7 @@ var BaseView = (function () {
         this._resouce = null;
         this._controller = null;
         App.StageUtils.getStage().off(Laya.Event.RESIZE, this, this.onResize);
-        _super_.destroy.call(this);
+        _super_.destroy.call(this, true);
     }
     
     /**

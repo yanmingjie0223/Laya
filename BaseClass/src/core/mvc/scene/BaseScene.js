@@ -44,6 +44,7 @@ var BaseScene = (function () {
             for (var i = 0; i < len; i++) {
                 currentView = this.getChildAt(i);
                 if (currentView.getLayer() > layer) {
+                    this._views.splice(i, 0, view);
                     this.addChildAt(view, this.getChildIndex(currentView));
                     return;
                 }

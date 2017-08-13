@@ -17,14 +17,14 @@ var BaseFloatView = (function () {
     _proto_.show = function(center, scene){
         (center === void 0) && (arguments[0] = true);
         (scene === void 0) && (arguments[1] = null);
-        _super_.show.call(this, arguments);
+        _super_.show.apply(this, arguments);
         this.parent.addChildAt(this.bg, this.parent.getChildIndex(this));
         this.bg.pos(0, 0);
         this.bg.size(App.StageUtils.stageW, App.StageUtils.stageH);
     }
 
     _proto_.close = function(){
-        _super_.close.call(this, arguments);
+        _super_.close.apply(this, arguments);
         this.bg.removeSelf();
     }
 

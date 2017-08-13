@@ -41,7 +41,7 @@ var EasyLoading = (function () {
     }
 
     _proto_.close = function() {
-        if (this._content && this._content.parent) {
+        if (this._content) {
             this._content.removeSelf();
             this._uiImageContainer.rotation = 0;
         }
