@@ -90,7 +90,7 @@ var ViewManager = (function () {
      * @return {Boolean}
      */
     _proto_.isExists = function(viewKey) {
-        return this._views[viewKey] != null;
+        return !!this._views[viewKey];
     }
 
     /**

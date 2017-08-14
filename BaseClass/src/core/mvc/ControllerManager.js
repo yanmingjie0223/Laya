@@ -47,7 +47,7 @@ var ControllerManager = (function () {
      * @return {Boolean}
      */
     _proto_.isExists = function(controllerKey) {
-        return this._modules[controllerKey] != null;
+        return !!this._modules[controllerKey];
     }
 
     /**

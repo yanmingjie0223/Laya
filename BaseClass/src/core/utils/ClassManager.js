@@ -25,7 +25,7 @@ var ClassManager = (function () {
                 return this._cache[i];
             }
         }
-        var _cla = App.CommonUtils.getClass(arguments);
+        var _cla = this._getClass(arguments);
         this._cache.push(_cla);
         return _cla;
     }
@@ -44,6 +44,44 @@ var ClassManager = (function () {
 
     _proto_.clearAll = function() {
         this._cache = null;
+    }
+
+    /**
+     * 获取类实类对象，传入类实参
+     * @param args ...args {Array}
+     */
+    _proto_._getClass = function(args) {
+        var params = [];
+        for (var i = 1; i < args.length; i++) {
+            params[i - 1] = args[i];
+        }
+        var len = params.length;
+        var Class = args[0];
+        var _cla = null;
+        switch(len){
+            case 0:
+                _cla = new Class();
+                break;
+            case 1:
+                _cla = new Class(params[0]);
+                break;
+            case 2:
+                _cla = new Class(params[0], params[1]);
+                break;
+            case 3:
+                _cla = new Class(params[0], params[1], params[2]);
+                break;
+            case 4:
+                _cla = new Class(params[0], params[1], params[2], params[3]);
+                break;
+            case 5:
+                _cla = new Class(params[0], params[1], params[2], params[3], params[4]);
+                break;
+            case 6:
+                _cla = new Class(params[0], params[1], params[2], params[3], params[4], params[5]);
+                break;
+        }
+        return _cla;
     }
 
     return ClassManager;

@@ -11,6 +11,7 @@ var Main = (function(){
 	}
 
 	_proto_.init = function(){
+		App.DebugUtils.isDebug = true;
 		App.StageUtils.init();
 
 		//注册场景
