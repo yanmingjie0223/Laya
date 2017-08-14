@@ -21,13 +21,9 @@ var SceneManager = (function () {
      * @param key Scene唯一标识 {any}
      */
     _proto_.clear = function(key) {
-        var isCurr = false;
-        if(key == this._currScene){
-            isCurr = true;
-        }
         var scene = this._scenes[key];
         if(scene){
-            if(isCurr){
+            if(scene == this._currScene){
                 scene.onExit();
                 this._currScene = null;
             }
@@ -39,9 +35,8 @@ var SceneManager = (function () {
      * 清理所有
      */
     _proto_.clearAll = function() {
-        var nowScene = this._scenes[this._currScene];
-        if(nowScene){
-            nowScene.onExit();
+        if(this._currScene){
+            this._currScene.onExit();
             this._currScene = null;
         }
         this._scenes = {};
@@ -72,18 +67,17 @@ var SceneManager = (function () {
      */
     _proto_.runScene = function(key) {
         var nowScene = this._scenes[key];
-        if (nowScene == null) {
+        if (!nowScene) {
             Logger.trace("场景" + key + "不存在");
             return;
         }
 
-        var oldScene = this._scenes[this._currScene];
-        if (oldScene) {
-            oldScene.onExit();
+        if (this._currScene) {
+            this._currScene.onExit();
         }
 
         nowScene.onEnter();
-        this._currScene = key;
+        this._currScene = nowScene;
     }
 
     /**
