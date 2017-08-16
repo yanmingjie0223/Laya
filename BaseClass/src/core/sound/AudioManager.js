@@ -7,7 +7,6 @@ var AudioManager = (function () {
         AudioManager.__super.call(this);
 
         this._isMute = false;
-
         this._isMuteBg = false;
         this._isMuteEffect = false;
 
@@ -22,18 +21,21 @@ var AudioManager = (function () {
     var _proto_ = AudioManager.prototype;
     var _getset_ = Laya.getset;
 
+    /**
+     * 获取初始音乐基础信息，存储在本地浏览器中
+     */
     _proto_.initData = function(){
-        var isMuteBg = Laya.LocalStorage.getItem("isMuteBg");
-        this._isMuteBg = !!isMuteBg ? true : false;
-        var isMuteEffect = Laya.LocalStorage.getItem("isMuteEffect");
-        this._isMuteEffect = !!isMuteEffect ? true : false;
-        var isMute = Laya.LocalStorage.getItem("isMute");
-        this._isMute = !!isMute ? true : false;
+        var isMuteBg = Laya.LocalStorage.getItem("isMuteBg") + "";
+        this._isMuteBg = isMuteBg === "true" ? true : false;
+        var isMuteEffect = Laya.LocalStorage.getItem("isMuteEffect") + "";
+        this._isMuteEffect = isMuteEffect === "true" ? true : false;
+        var isMute = Laya.LocalStorage.getItem("isMute") + "";
+        this._isMute = isMute === "true" ? true : false;
 
         var volumeBg = Laya.LocalStorage.getItem("volumeBg");
-        this._volumeBg = (volumeBg || volumeBg == 0) ? volumeBg : 1;
+        this._volumeBg = volumeBg ? parseFloat(volumeBg) : 1;
         var volumeEffect = Laya.LocalStorage.getItem("volumeEffect");
-        this._volumeEffect = (volumeEffect || volumeEffect == 0) ? volumeEffect : 1;
+        this._volumeEffect = volumeEffect ? parseFloat(volumeEffect) : 1;
 
         Laya.SoundManager.musicMuted = this.isMuteBg;
         Laya.SoundManager.soundMuted = this.isMuteEffect;
@@ -41,7 +43,6 @@ var AudioManager = (function () {
         Laya.SoundManager.musicVolume = this.volumeBg;
         Laya.SoundManager.soundVolume = this.volumeEffect;
     }
-
 
     /**
      * api方法 SoundManager
@@ -56,7 +57,7 @@ var AudioManager = (function () {
         (loops === void 0) && (loops = 0);
         (complete === void 0) && (complete = null);
         (startTime === void 0) && (startTime = 0);
-        Laya.SoundManager.playSound(url, loops, complete, startTime);
+        Laya.SoundManager.playMusic(url, loops, complete, startTime);
     }
     _proto_.playSound = function(url, loops, complete, soundClass, startTime){
         (loops === void 0) && (loops = 1);
@@ -70,13 +71,9 @@ var AudioManager = (function () {
     }
     _proto_.setMusicVolume = function(volume){
         Laya.SoundManager.setMusicVolume(volume);
-        this._volumeBg = volume;
-        this.save();
     }
     _proto_.setSoundVolume = function(volume){
         Laya.SoundManager.setSoundVolume(volume);
-        this._volumeEffect = volume;
-        this.save();
     }
     _proto_.stopAll = function(){
         Laya.SoundManager.stopAll();
@@ -90,7 +87,6 @@ var AudioManager = (function () {
     _proto_.stopSound = function(url){
         Laya.SoundManager.stopSound(url);
     }
-    
     _getset_(0, _proto_, "playbackRate",
         function(){
             return Laya.SoundManager.playbackRate;
@@ -99,7 +95,6 @@ var AudioManager = (function () {
             Laya.SoundManager.playbackRate = value;
         }
     );
-
     _getset_(0, _proto_, "autoStopMusic",
         function(){
             return Laya.SoundManager.autoStopMusic;
@@ -108,40 +103,44 @@ var AudioManager = (function () {
             Laya.SoundManager.autoStopMusic = value;
         }
     );
-
     _getset_(0, _proto_, "musicMuted",
         function(){
-            return this.isMuteBg;
+            return Laya.SoundManager.musicMuted;
         },
         function(value){
-            this.isMuteBg = value;
+            Laya.SoundManager.musicMuted = value;
         }
     );
-
     _getset_(0, _proto_, "musicVolume",
         function(){
-            return this.volumeBg;
+            return Laya.SoundManager.musicVolume;
         },
         function(value){
-            this.volumeBg = value;
+            Laya.SoundManager.musicVolume = value;
         }
     );
-
     _getset_(0, _proto_, "soundMuted",
         function(){
-            return this.isMuteEffect;
+            return Laya.SoundManager.soundMuted;
         },
         function(value){
-            this.isMuteEffect = value;
+            Laya.SoundManager.soundMuted = value;
         }
     );
-
     _getset_(0, _proto_, "soundVolume",
         function(){
-            return this.volumeEffect;
+            return Laya.SoundManager.soundVolume;
         },
         function(value){
-            this.volumeEffect = value;
+            Laya.SoundManager.soundVolume = value;
+        }
+    );
+    _getset_(0, _proto_, "muted",
+        function(){
+            return Laya.SoundManager.muted;
+        },
+        function(value){
+            Laya.SoundManager.muted = value;
         }
     );
 
@@ -162,7 +161,7 @@ var AudioManager = (function () {
         },
         function(value){
             this._volumeBg = value;
-            Laya.SoundManager.musicVolume = value;
+            this.setMusicVolume(value);
             this.save();
         }
     );
@@ -173,7 +172,7 @@ var AudioManager = (function () {
         },
         function(value){
             this._volumeEffect = value;
-            Laya.SoundManager.soundVolume = value;
+            this.setSoundVolume(value);
             this.save();
         }
     );
@@ -184,7 +183,7 @@ var AudioManager = (function () {
         },
         function(value){
             this._isMuteBg = value;
-            Laya.SoundManager.musicMuted = value;
+            this.musicMuted = value;
             this.save();
         }
     );
@@ -195,7 +194,7 @@ var AudioManager = (function () {
         },
         function(value){
             this._isMuteEffect = value;
-            Laya.SoundManager.soundMuted = value;
+            this.soundMuted = value;
             this.save();
         }
     );
@@ -206,7 +205,7 @@ var AudioManager = (function () {
         },
         function(value){
             this._isMute = value;
-            Laya.SoundManager.muted = value;
+            this.muted = value;
             this.save();
         }
     );
