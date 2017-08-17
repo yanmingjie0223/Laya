@@ -9,6 +9,7 @@ var ResourceType = (function () {
     ResourceType["JPG"] = "jpg";
     ResourceType["TXT"] = "txt";
     ResourceType["MP4"] = "mp4";
+    ResourceType["MP3"] = "mp3";
     ResourceType["JSON"] = "json";
 
     function ResourceType() {}
