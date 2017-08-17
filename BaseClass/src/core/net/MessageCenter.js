@@ -32,9 +32,7 @@ var MessageCenter = (function () {
         }
 
         //检测是否已经存在
-        var i = 0;
-        var len = arr.length;
-        for (i; i < len; i++) {
+        for (var i = 0, len = arr.length; i < len; i++) {
             if (arr[i][0] == listener && arr[i][1] == listenerObj) {
                 return;
             }
@@ -55,9 +53,7 @@ var MessageCenter = (function () {
             return;
         }
 
-        var i = 0;
-        var len = arr.length;
-        for (i; i < len; i++) {
+        for (var i = 0, len = arr.length; i < len; i++) {
             if (arr[i][0] == listener && arr[i][1] == listenerObj) {
                 arr.splice(i, 1);
                 break;
@@ -76,9 +72,7 @@ var MessageCenter = (function () {
      * @param param 消息参数 {any}
      */
     _proto_.dispatch = function(cmd, param) {
-        if (this.dict[cmd] == null) {
-            return;
-        }
+        if (!this.dict[cmd]) { return; }
 
         var vo = new MessageVo();
         vo.cmd = cmd;
@@ -94,17 +88,11 @@ var MessageCenter = (function () {
         var cmd = msgVo.cmd;
         var param = App.CommonUtils.copy(msgVo.param);
         var listeners = this.dict[cmd];
-        var i = 0;
-        var len = listeners.length;
-        var listener = null;
-        while (i < len) {
-            listener = listeners[i];
+        if (!listeners) { return; }
+
+        for (var i = 0, len = listeners.length; i < len; i++) {
+            var listener = listeners[i];
             listener[0].apply(listener[1], [param]);
-            if (listeners.length != len) {
-                len = listeners.length;
-                i--;
-            }
-            i++;
         }
         msgVo.destroy();
     }
