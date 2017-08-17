@@ -34,7 +34,7 @@ var Tip = (function () {
         
         this.x = (App.StageUtils.stageW - w)>>1;
         this.y = (App.StageUtils.stageH - h)>>1;
-        App.StageUtils.getStage().addChild(this);
+        App.StageUtils.stage.addChild(this);
     }
 
     _proto_.close = function(){

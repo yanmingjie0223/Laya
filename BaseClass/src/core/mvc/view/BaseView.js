@@ -17,7 +17,7 @@ var BaseView = (function () {
         //初始化这个view需要的资源
         this.initRes();
 
-        App.StageUtils.getStage().on(Laya.Event.RESIZE, this, this.onResize);
+        App.StageUtils.stage.on(Laya.Event.RESIZE, this, this.onResize);
     }
 
     Laya.class(BaseView, "BaseView", BaseSprite);
@@ -143,7 +143,7 @@ var BaseView = (function () {
         this._isInit = false;
         this._resouce = null;
         this._controller = null;
-        App.StageUtils.getStage().off(Laya.Event.RESIZE, this, this.onResize);
+        App.StageUtils.stage.off(Laya.Event.RESIZE, this, this.onResize);
         _super_.destroy.call(this, true);
     }
     

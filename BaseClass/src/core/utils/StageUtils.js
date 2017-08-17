@@ -51,9 +51,11 @@ var StageUtils = (function () {
     /**
      * get stage
      */
-    _proto_.getStage = function(){
-        return Laya.stage;
-    }
+    _getset_(0, _proto_, "stage",
+        function(){
+            return Laya.stage;
+        }
+    );
 
     /**
      * get stage width

@@ -25,11 +25,11 @@ var AudioManager = (function () {
      * 获取初始音乐基础信息，存储在本地浏览器中
      */
     _proto_.initData = function(){
-        var isMuteBg = Laya.LocalStorage.getItem("isMuteBg") + "";
+        var isMuteBg = Laya.LocalStorage.getItem("isMuteBg");
         this._isMuteBg = isMuteBg === "true" ? true : false;
-        var isMuteEffect = Laya.LocalStorage.getItem("isMuteEffect") + "";
+        var isMuteEffect = Laya.LocalStorage.getItem("isMuteEffect");
         this._isMuteEffect = isMuteEffect === "true" ? true : false;
-        var isMute = Laya.LocalStorage.getItem("isMute") + "";
+        var isMute = Laya.LocalStorage.getItem("isMute");
         this._isMute = isMute === "true" ? true : false;
 
         var volumeBg = Laya.LocalStorage.getItem("volumeBg");

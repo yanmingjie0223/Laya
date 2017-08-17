@@ -19,7 +19,7 @@ var BaseScene = (function () {
      * 进入Scene调用
      */
     _proto_.onEnter = function() {
-        App.StageUtils.getStage().addChild(this);
+        App.StageUtils.stage.addChild(this);
     }
 
     /**

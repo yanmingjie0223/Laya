@@ -68,10 +68,7 @@ var DisplayUtils = (function () {
         (parent === void 0) && (parent = null);
         var image = new Laya.Sprite();
         if (textureUrl) {
-            image.texture = Laya.loader.getRes(textureUrl);
-            if (!image.texture) {
-                this.imageToTexture(textureUrl, image);
-            }
+            this.imageToTexture(textureUrl, image);
         }
         image.pos(xPos, yPos);
         if (image.texture) {
@@ -94,10 +91,7 @@ var DisplayUtils = (function () {
         (parent === void 0) && (parent = null);
         var image = new Laya.Image();
         if (textureUrl) {
-            image.source = Laya.loader.getRes(textureUrl);
-            if(!image.source){
-                this.imageToTexture(textureUrl, image);
-            }
+            this.imageToTexture(textureUrl, image);
         }
         image.pos(xPos, yPos);
         if (image.source) {
@@ -174,13 +168,43 @@ var DisplayUtils = (function () {
 
     /**
      * 创建骨骼动画
+     * @param xPos x坐标     {number}
+     * @param yPos y坐标     {number}
+     * @param png图片集地址
+     * @param sk文件地址
+     * @param 骨骼类型是否换装：1：换装、0：不换装
+     * @param parent 父容器   {Sprite}
+     */
+    _proto_.createSkeleton = function(xPos, yPos, pngUrl, skUrl, type, parent){
+        var templet = new Laya.Templet();
+        var skeleton = new Laya.Skeleton();
+
+        var pngData = Laya.loader.getRes(pngUrl);
+        var skData = Laya.loader.getRes(skUrl);
+        if(pngData && skData){
+            templet.parseData(pngData, skData);
+            skeleton = templet.buildArmature(type);
+            skeleton.pos(xPos, yPos);
+            if(parent) {
+                parent.addChild(skeleton);
+            }
+            return skeleton;
+        }
+        else {
+            console.warn("动画资源未提前加载！");
+        }
+        return null;
+    }
+
+    /**
+     * 创建骨骼动画
      * @param png图片集地址
      * @param sk文件地址
      * @param 骨骼类型是否换装：1：换装、0：不换装
      * @param 回调函数
      * @param 回调函数this对象
      */
-    _proto_.createSkeleton = function(pngUrl, skUrl, type, callback, thisObj){
+    _proto_.createAsynSkeleton = function(pngUrl, skUrl, type, callback, thisObj){
         (thisObj === void 0) && (thisObj = null);
         var templet = new Laya.Templet();
         var skeleton = new Laya.Skeleton();
@@ -246,15 +270,6 @@ var DisplayUtils = (function () {
                 }, null);
             }
         }
-    }
-
-    /**
-     * 从父级移除child
-     * @param child {Laya.Sprite}
-     */
-    _proto_.removeFromParent = function(child) {
-        if(!child) return;
-        child.removeSelf();
     }
 
     return DisplayUtils;
