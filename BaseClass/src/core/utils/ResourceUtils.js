@@ -18,7 +18,7 @@ var ResourceUtils = (function () {
      * @param onResourceLoadTarget        {any}
      */
     _proto_.loadResource = function(resource, onResourceLoadComplete, onResourceLoadProgress, onResourceLoadTarget){
-        Laya.loader.load(resource, Laya.Handler.create(onResourceLoadTarget, onResourceLoadComplete), Laya.Handler.create(onResourceLoadTarget, onResourceLoadProgress));
+        Laya.loader.load(resource, Laya.Handler.create(onResourceLoadTarget, onResourceLoadComplete), Laya.Handler.create(onResourceLoadTarget, onResourceLoadProgress, null, false));
     }
 
     /**
