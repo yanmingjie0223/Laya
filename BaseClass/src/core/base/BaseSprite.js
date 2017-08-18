@@ -22,7 +22,7 @@ var BaseSprite = (function () {
     /**
      * 获取单例
      */
-    BaseEventDispatcher.getInstance = function () {
+    BaseSprite.getInstance = function () {
         var args = arguments;
         var Class = this;
         if (!Class._instance) {
