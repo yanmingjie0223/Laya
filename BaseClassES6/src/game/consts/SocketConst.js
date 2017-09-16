@@ -1,0 +1,6 @@
+/*
+* name;
+*/
+class SocketConst {
+    constructor() {}
+}

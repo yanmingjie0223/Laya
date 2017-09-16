@@ -1,0 +1,6 @@
+/*
+* name;
+*/
+class HomeConst {
+    constructor() {}
+}

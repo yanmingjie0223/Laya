@@ -1,0 +1,6 @@
+/*
+* name;
+*/
+class StringConfig {
+    constructor(){}
+}
