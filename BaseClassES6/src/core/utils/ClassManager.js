@@ -5,6 +5,8 @@ class ClassManager extends BaseClass {
 
     constructor() {
         super();
+        //所有缓存类数组
+        this._cache = null;
     }
 
     /**

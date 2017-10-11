@@ -5,6 +5,8 @@ class FontManager extends BaseClass {
 
     constructor() {
         super();
+        //缓存数组
+        this._fontCache = null;
     }
 
     /**
