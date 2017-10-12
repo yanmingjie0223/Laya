@@ -14,5 +14,6 @@ ResourceType["TXT"] = "txt";
 ResourceType["JSON"] = "json";
 
 ResourceType["MP4"] = "mp4";
+
 ResourceType["MP3"] = "mp3";
 ResourceType["WAV"] = "wav";
