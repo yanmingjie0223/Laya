@@ -1,2 +1,6 @@
 .laya/
 .git/
+.idea/
+bin/res
+bin/.rec
+bin/unpack.json

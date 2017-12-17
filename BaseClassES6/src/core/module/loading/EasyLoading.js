@@ -72,7 +72,7 @@ class EasyLoading extends BaseClass {
         self._uiImageContainer = new Laya.Sprite();
         self._content.addChild(self._uiImageContainer);
 
-        let url = App.ResourceUtils.getUrl("loading", "load_Reel", ResourceType.PNG);
+        let url = App.ResourceUtils.getUrl("res/loading", "load_Reel", ResourceType.PNG);
         App.DisplayUtils.imageUrlLoad(url, function(){
             let img = App.DisplayUtils.createImage(0, 0, url, self._uiImageContainer);
             img.pivot(img.width>>1, img.height>>1);
