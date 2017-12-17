@@ -45,7 +45,7 @@ class Tip extends BaseSprite {
         self._msgTF = App.DisplayUtils.createText(11, 11, 24, 250, self, 0xffffff);
         self._msgTF.autoSize = true;
 
-        let url = App.ResourceUtils.getUrl("tip", "tipBG", ResourceType.PNG);
+        let url = App.ResourceUtils.getUrl("res/tip", "tipBG", ResourceType.PNG);
         App.DisplayUtils.imageUrlLoad(url, function(){
             let texture = Laya.loader.getRes(url);
             if(texture){

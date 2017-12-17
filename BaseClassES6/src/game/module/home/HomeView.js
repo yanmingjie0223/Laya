@@ -18,15 +18,16 @@ class HomeView extends BaseView {
 
     initRes() {
         this.resouce = [
-            { url : "res/atlas/comp.json", type : Laya.Loader.ATLAS }
+            { url : "res/comp.json", type : Laya.Loader.ATLAS },
+            { url : "res/switchButton.json", type : Laya.Loader.ATLAS },
         ]
         super.initRes();
     }
 
     initView() {
-        this._btn = new Laya.Button("comp/button.png", "第一个按钮");
-        this._btn2 = new Laya.Button("comp/button.png", "第二个按钮");
-        this._btn3 = new Laya.Button("comp/button.png", "第三个按钮");
+        this._btn = new Laya.Button("res/comp/button.png", "第一个按钮");
+        this._btn2 = new Laya.Button("res/comp/button.png", "第二个按钮");
+        this._btn3 = new Laya.Button("res/comp/button.png", "第三个按钮");
         this._btn.pos(200, 100);
         this._btn2.pos(200, 300);
         this._btn3.pos(200, 500);
