@@ -19,27 +19,37 @@ class HomeController extends BaseController {
         App.ViewManager.register(ViewConst.HOME, this.homeView);
 
         this.homeProxy = new BaseProxy(this);
-        App.ResourceUtils.loadResource([{url: "res/protobuf/user.proto", type: Laya.Loader.TEXT}], this.protoTest, null, this);
+
+        Laya.Browser.window.protobuf.load("res/protobuf/user.proto", this.protoTest);
     }
 
-    protoTest() {
-        let protoInfo = Laya.loader.getRes("res/protobuf/user.proto");
-        let message = dcodeIO.ProtoBuf.loadProto(protoInfo);
-        let userInfoClass = message.build("userInfo");
-        let userInfo = new userInfoClass();
-        userInfo.userId = 123;
-        userInfo.userName = "peter";
-        //转换成二进制
-        let bytes = userInfo.toArrayBuffer();
+    protoTest(err, root) {
+        if (err) throw err;
+        
+		var AwesomeMessage = root.lookup("userInfo");
+		var message = AwesomeMessage.create({
+			userId: 222,
+            // userName: "lkjlj"
+		});
 
-        this.parsing(bytes);
-    }
+		// Verify the message if necessary (i.e. when possibly incomplete or invalid)
+		var errMsg = AwesomeMessage.verify(message);
+		if (errMsg) throw Error(errMsg);
 
-    parsing(bytes) {
-        let userInfoStr = bytes.toString();
-        let message = dcodeIO.ProtoBuf.loadProto(userInfoStr);
-        let userInfoClass = message.build("userInfo");
-        let userInfo = new userInfoClass();
+		// Encode a message to an Uint8Array (browser) or Buffer (node)
+		var buffer = AwesomeMessage.encode(message).finish();
+		// ... do something with buffer
+
+		// Or, encode a plain object
+		var buffer = AwesomeMessage.encode({
+			userId: 222,
+            userName: "lkjlj"
+		}).finish();
+		// ... do something with buffer
+
+		// Decode an Uint8Array (browser) or Buffer (node) to a message
+		var message = AwesomeMessage.decode(buffer);
+		// ... do something with message
     }
 
 }
