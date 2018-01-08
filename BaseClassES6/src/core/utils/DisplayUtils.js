@@ -103,8 +103,8 @@ class DisplayUtils extends BaseClass {
      * 创建一个位图文本
      * @param {number} xPos x坐标
      * @param {number} yPos y坐标
-     * @param {string} fontUrl配置文件
-     * @param {string} fontPngUrl纹理地址
+     * @param {string} fontUrl 配置文件
+     * @param {string} fontPngUrl 纹理地址
      * @param {string} fontName
      * @param {Sprite} parent 父容器
      * @param {number} width 文本宽度
@@ -159,13 +159,11 @@ class DisplayUtils extends BaseClass {
      * 创建骨骼动画
      * @param {number} xPos x坐标
      * @param {number} yPos y坐标
-     * @param {string} png图片集地址
-     * @param {string} sk文件地址
-     * @param {number} 骨骼类型是否换装：1：换装、0：不换装
+     * @param {string} skKey 地址key
+     * @param {number} type 骨骼类型是否换装：1：换装、0：不换装
      * @param {Sprite} parent 父容器
      */
-    createSkeleton(xPos, yPos, pngUrl, skUrl, type, parent = null){
-        let skKey = skUrl.split(".")[0];
+    createSkeleton(xPos, yPos, skKey, type, parent = null){
         let templet = this.createTemplet(skKey);
         if(templet){
             let skeleton = templet.buildArmature(type);
@@ -183,21 +181,19 @@ class DisplayUtils extends BaseClass {
 
     /**
      * 创建骨骼动画
-     * @param {string} png图片集地址
-     * @param {string} sk文件地址
+     * @param {string} skKey 地址key
      * @param {number} 骨骼类型是否换装：1：换装、0：不换装
      * @param {Function} 回调函数
      * @param {any} 回调函数this对象
      */
-    createAsynSkeleton(pngUrl, skUrl, type, callback = null, thisObj = null){
-        let skKey = skUrl.split(".")[0];
+    createAsynSkeleton(skKey, type, callback = null, thisObj = null){
         let templet = this.createTemplet(skKey);
         if(templet){
             compleSk();
         }else{
             let res = [
-                {"type":Laya.Loader.BUFFER, "url":skUrl},
-                {"type":Laya.Loader.IMAGE, "url":pngUrl}
+                {"type": Laya.Loader.BUFFER, "url": skKey + ".sk"},
+                {"type": Laya.Loader.IMAGE,  "url": skKey + ".png"}
             ];
             App.ResourceUtils.loadResource(res, compleSk, null, null);
         }

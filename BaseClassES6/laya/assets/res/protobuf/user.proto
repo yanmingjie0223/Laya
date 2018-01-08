@@ -1,0 +1,7 @@
+/**
+ * 用户格式
+ */
+message userInfo {
+    required int32 userId = 1;
+    required string userName = 2;
+}

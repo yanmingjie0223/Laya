@@ -5,4 +5,5 @@
    <item name="res/sound" type="" compress="0" pack="2" quality="80" props="" picType="0"/>
    <item name="res/loading" type="" compress="0" pack="2" quality="80" props="" picType="0"/>
    <item name="res/tip" type="" compress="0" pack="2" quality="80" props="" picType="0"/>
+   <item name="res/protobuf" type="" compress="0" pack="2" quality="80" props="" picType="0"/>
 </res>
