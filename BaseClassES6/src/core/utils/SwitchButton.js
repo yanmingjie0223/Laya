@@ -23,12 +23,7 @@ class SwitchButton extends Laya.Sprite {
         switch(target) {
             case this._bg:
                 if (type == Laya.Event.CLICK) {
-                    if (this.isOpen) {
-                        this._closeBtn();
-                    }
-                    else {
-                        this._openBtn();
-                    }
+                    this._switch();
                 }
                 else {
                     this._mouseMove(event.stageX);
@@ -39,18 +34,19 @@ class SwitchButton extends Laya.Sprite {
                     this._downPointX = event.stageX;
                     Laya.stage.on(Laya.Event.MOUSE_MOVE, this, this._onHandle);
                     Laya.stage.on(Laya.Event.MOUSE_UP, this, this._onHandle);
+                    this._btn.on(Laya.Event.CLICK, this, this._onHandle);
                 }
                 else if (type == Laya.Event.MOUSE_UP) {
-                    Laya.stage.off(Laya.Event.MOUSE_UP, this, this._onHandle);
-                    Laya.stage.off(Laya.Event.MOUSE_MOVE, this, this._onHandle);
-                    this._downPointX = null;
+                    this._closeStageEvent();
+                }
+                else if (type == Laya.Event.CLICK) {
+                    this._closeStageEvent();
+                    this._switch();
                 }
                 break;
             default:
                 if (type == Laya.Event.MOUSE_UP) {
-                    Laya.stage.off(Laya.Event.MOUSE_UP, this, this._onHandle);
-                    Laya.stage.off(Laya.Event.MOUSE_MOVE, this, this._onHandle);
-                    this._downPointX = null;
+                    this._closeStageEvent();
                 }
                 else {
                     this._mouseMove(event.stageX);
@@ -82,6 +78,15 @@ class SwitchButton extends Laya.Sprite {
     }
 
     /**
+     * 关闭舞台滑动事件
+     */
+    _closeStageEvent() {
+        Laya.stage.off(Laya.Event.MOUSE_UP, this, this._onHandle);
+        Laya.stage.off(Laya.Event.MOUSE_MOVE, this, this._onHandle);
+        this._downPointX = null;
+    }
+
+    /**
      * 开动画
      */
     _openBtn() {
@@ -110,6 +115,18 @@ class SwitchButton extends Laya.Sprite {
     }
 
     /**
+     * 开关控制
+     */
+    _switch() {
+        if (this.isOpen) {
+            this._closeBtn();
+        }
+        else {
+            this._openBtn();
+        }
+    }
+
+    /**
      * 设置开关状态
      */
     setStatus(isOpen) {
@@ -127,6 +144,7 @@ class SwitchButton extends Laya.Sprite {
 
     set isOpen(isOp) {
         this._isOpen = isOp;
+        this._btn.off(Laya.Event.CLICK, this, this._onHandle);
     }
 
     get isOpen() {
@@ -144,6 +162,7 @@ class SwitchButton extends Laya.Sprite {
         this._bg.off(Laya.Event.CLICK, this, this._onHandle);
         this._btn.off(Laya.Event.MOUSE_UP, this, this._onHandle);
         this._btn.off(Laya.Event.MOUSE_DOWN, this, this._onHandle);
+        this._btn.off(Laya.Event.CLICK, this, this._onHandle);
         Laya.stage.off(Laya.Event.MOUSE_UP, this, this._onHandle);
         Laya.stage.off(Laya.Event.MOUSE_MOVE, this, this._onHandle);
     }

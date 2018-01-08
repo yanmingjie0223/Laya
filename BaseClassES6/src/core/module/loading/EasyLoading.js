@@ -6,6 +6,7 @@ class EasyLoading extends BaseClass {
     constructor() {
         super();
         this._content = null;
+        this._uiBG = null;
         this._uiImageContainer = null;
         this._timeKey = null;
         this._initView();
@@ -17,8 +18,8 @@ class EasyLoading extends BaseClass {
     show() {
         App.StageUtils.stage.addChild(this._content);
         this._onResize();
-        clearTimeout(this._timeKey);
-        this._timeKey = setTimeout(this._enterFrame.bind(this), 200);
+        Laya.timer.clearAll(this);
+        Laya.timer.loop(200, this, this._enterFrame);
         App.StageUtils.stage.on(Laya.Event.RESIZE, this, this._onResize);
     }
 
@@ -27,21 +28,24 @@ class EasyLoading extends BaseClass {
      */
     close() {
         App.StageUtils.stage.off(Laya.Event.RESIZE, this, this._onResize);
+        Laya.timer.clearAll(this);
         if (this._content) {
-            this._content.graphics.clear();
-            this._content.removeSelf();
+            this._uiBG.graphics.clear();
             this._uiImageContainer.rotation = 0;
+            this._content.removeSelf();
         }
-        clearTimeout(this._timeKey);
     }
     
     /**
      * 更新背景黑色
      */
     _initBG() {
-        this._content.graphics.clear();
-        this._content.graphics.drawRect(0, 0, App.StageUtils.stageW, App.StageUtils.stageH, "#000000");
-        this._content.size(App.StageUtils.stageW, App.StageUtils.stageH);
+        let _width = App.StageUtils.stageW;
+        let _height = App.StageUtils.stageH;
+        this._uiBG.graphics.clear();
+        this._uiBG.graphics.drawRect(0, 0, _width, _height, "#000000");
+        this._uiBG.size(_width, _height);
+        this._content.size(_width, _height);
     }
 
     /**
@@ -51,7 +55,6 @@ class EasyLoading extends BaseClass {
         let rota = this._uiImageContainer.rotation + 30;
         rota = rota % 360;
         this._uiImageContainer.rotation = rota;
-        this._timeKey = setTimeout(this._enterFrame.bind(this), 200);
     }
 
     /**
@@ -59,18 +62,18 @@ class EasyLoading extends BaseClass {
      */
     _onResize() {
         this._initBG();
-        this._uiImageContainer.pos(this._content.width>>1, this._content.height>>1);
+        this._uiImageContainer.pos(this._uiBG.width>>1, this._uiBG.height>>1);
     }
 
     _initView() {
         let self = this;
 
-        self._content = new Laya.Sprite();
+        self._content = App.DisplayUtils.createSprite(0, 0, null);
         self._content.mouseEnabled = true;
-        self._content.alpha = 0.4;
 
-        self._uiImageContainer = new Laya.Sprite();
-        self._content.addChild(self._uiImageContainer);
+        self._uiBG = App.DisplayUtils.createSprite(0, 0, self._content);
+        self._uiBG.alpha = 0.4;
+        self._uiImageContainer = App.DisplayUtils.createSprite(0, 0, self._content);
 
         let url = App.ResourceUtils.getUrl("res/loading", "load_Reel", ResourceType.PNG);
         App.DisplayUtils.imageUrlLoad(url, function(){

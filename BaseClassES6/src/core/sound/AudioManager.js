@@ -33,9 +33,9 @@ class AudioManager extends BaseClass {
         let volumeSound = Laya.LocalStorage.getItem("volumeSound");
         this._volumeSound = volumeSound ? parseFloat(volumeSound) : 1;
 
+        Laya.SoundManager.muted = this.isMute;
         Laya.SoundManager.musicMuted = this.isMuteMusic;
         Laya.SoundManager.soundMuted = this.isMuteSound;
-        Laya.SoundManager.muted = this.isMute;
         Laya.SoundManager.musicVolume = this.volumeMusic;
         Laya.SoundManager.soundVolume = this.volumeSound;
     }
