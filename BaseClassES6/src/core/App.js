@@ -62,6 +62,13 @@ class App {
     }
 
     /**
+     * 单例获取protobuf控制类
+     */
+    static get ProtobufManager() {
+        return ProtobufManager.getInstance();
+    }
+
+    /**
      * 单例获取公共加载旋转界面类
      */
     static get EasyLoading() {
