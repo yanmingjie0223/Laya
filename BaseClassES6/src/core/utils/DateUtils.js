@@ -9,7 +9,7 @@ class DateUtils extends BaseClass {
 
     /**
      * 1 格式化时间获取 00:00:00
-     * @param 时间戳差 {number}
+     * @param {number} 时间戳差
      */
     formatTime(time) {
         let str = "";
@@ -39,9 +39,9 @@ class DateUtils extends BaseClass {
 
     /**
      * 2 使用时间返回所需要的字符串格式"2016年06月12日"
-     * @param 时间戳 {number}
-     * @param 返回格式 "yyyy年MM月dd日" {string}
-     * @return 返回指点格式字符串 {string}
+     * @param {number} 时间戳
+     * @param {string} 返回格式 "yyyy年MM月dd日"
+     * @return {string} 返回指点格式字符串
      * */
     millisecondsToDate(time, fmt) {
         let d = new Date(time);

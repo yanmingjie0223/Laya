@@ -11,8 +11,8 @@ class HomeView extends BaseView {
         this._btn3 = null;
     }
 
-    show() {
-        super.show();
+    show(...args) {
+        super.show.apply(this, args);
         this.loadResource();
     }
 

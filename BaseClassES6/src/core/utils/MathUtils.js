@@ -9,7 +9,7 @@ class MathUtils extends BaseClass {
 
     /**
      * 弧度制转换为角度值
-     * @param radian {number}
+     * @param {number} radian
      * @returns {number}
      */
     getAngle(radian) {
@@ -18,7 +18,7 @@ class MathUtils extends BaseClass {
 
     /**
      * 角度值转换为弧度制
-     * @param angle {number}
+     * @param {number} angle
      */
     getRadian(angle) {
         return angle / 180 * Math.PI;
@@ -26,8 +26,8 @@ class MathUtils extends BaseClass {
 
     /**
      * 获取两点间弧度
-     * @param p1 {Point}
-     * @param p2 {Point}
+     * @param {Point} p1
+     * @param {Point} p2
      * @returns {number}
      */
     getRadianTwoPoint(p1, p2) {
@@ -38,8 +38,8 @@ class MathUtils extends BaseClass {
 
     /**
      * 获取两点间旋转角度（顺时针）
-     * @param p1 {Point}
-     * @param p2 {Point}
+     * @param {Point} p1
+     * @param {Point} p2
      * @returns {number}
      */
     getAngleTwoPoint(p1, p2){
@@ -53,7 +53,7 @@ class MathUtils extends BaseClass {
             }
             return 0;
         }
-        
+
         if(vx == 0){ //正切是vy/vx所以vx==0排除
             if(vy > 0){
                 ang = 90;
@@ -80,8 +80,8 @@ class MathUtils extends BaseClass {
 
     /**
      * 获取两点间距离
-     * @param p1 {Point}
-     * @param p2 {Point}
+     * @param {Point} p1
+     * @param {Point} p2
      * @returns {number}
      */
     getDistance(p1, p2) {
@@ -93,8 +93,8 @@ class MathUtils extends BaseClass {
 
     /**
      * 精确到小数点后多少位（舍尾）
-     * @param 精确值    {number}
-     * @param 精确位数  {number}
+     * @param {number} 精确值
+     * @param {number} 精确位数
      * */
     exactCount (exactValue, count = 0) {
         let num = Math.pow(10, count);
@@ -104,10 +104,10 @@ class MathUtils extends BaseClass {
 
     /**
      * [0-1]区间获取二次贝塞尔曲线点切线角度
-     * @param p0起点      {Point}
-     * @param p1控制点    {Point}
-     * @param p2终点      {Point}
-     * @param [0-1]区间   {number}
+     * @param {Point} p0起点
+     * @param {Point} p1控制点
+     * @param {Point} p2终点
+     * @param {number} t [0-1]区间
      * */
     getBezierCutAngle (p0, p1, p2, t) {
         let _x = 2 * (p0.x * (t - 1) + p1.x * (1 - 2 * t) + p2.x * t);
@@ -118,11 +118,11 @@ class MathUtils extends BaseClass {
 
     /**
      * [0-1]区间获取二次贝塞尔曲线上某点坐标
-     * @param p0起点      {Point}
-     * @param p1控制点    {Point}
-     * @param p2终点      {Point}
-     * @param [0-1]区间   {number}
-     * @param 缓存的点对象，如不存在则生成新的点对象 {Point}
+     * @param {Point} p0 起点
+     * @param {Point} p1 控制点
+     * @param {Point} p2 终点
+     * @param {number} t [0-1]区间
+     * @param {Point} 缓存的点对象，如不存在则生成新的点对象
      * */
     getBezierPoint (p0, p1, p2, t, point = null) {
         if (!point) {

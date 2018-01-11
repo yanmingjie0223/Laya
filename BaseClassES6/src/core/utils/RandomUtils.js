@@ -9,8 +9,8 @@ class RandomUtils extends BaseClass {
 
     /**
      * 获取一个区间的随机数 (from, end)
-     * @param from 最小值 {number}
-     * @param end 最大值 {number}
+     * @param {number} from 最小值
+     * @param {number} end 最大值
      * @returns {number}
      */
     limit(from, end) {
@@ -22,8 +22,8 @@ class RandomUtils extends BaseClass {
 
     /**
      * 在一个数组中随机获取一个元素
-     * @param arr 数组 {Array} 
-     * @returns 随机出来的结果 {any}
+     * @param {Array} arr 数组
+     * @returns 随机出来的结果
      */
     randomArray(arr) {
         let index = Math.floor(Math.random() * arr.length);

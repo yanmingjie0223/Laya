@@ -5,13 +5,15 @@ class SceneManager extends BaseClass {
 
     constructor() {
         super();
+        //所有注册场景
         this._scenes = {};
+        //当前显示场景
         this._currScene = null;
     }
 
     /**
      * 清空处理
-     * @param key Scene唯一标识 {any}
+     * @param {any} key Scene唯一标识
      */
     clear(key) {
         let scene = this._scenes[key];
@@ -37,8 +39,8 @@ class SceneManager extends BaseClass {
 
     /**
      * 注册Scene
-     * @param key Scene唯一标识 {any}
-     * @param scene Scene对象 {BaseScene}
+     * @param {any} key Scene唯一标识
+     * @param {BaseScene} scene Scene对象
      */
     register(key, scene) {
         this._scenes[key] = scene;
@@ -46,7 +48,7 @@ class SceneManager extends BaseClass {
 
     /**
      * 注销Scene
-     * @param key Scene唯一标识 {any}
+     * @param {any} key Scene唯一标识
      */
     unregister(key) {
         if(this._scenes && this._scenes[key]){
@@ -56,7 +58,7 @@ class SceneManager extends BaseClass {
 
     /**
      * 切换场景
-     * @param key 场景唯一标识 {any}
+     * @param {any} key 场景唯一标识
      */
     runScene(key) {
         let nowScene = this._scenes[key];
@@ -83,7 +85,7 @@ class SceneManager extends BaseClass {
 
     /**
      * 获取scene
-     * @param 场景唯一标识
+     * @param key 场景唯一标识
      */
     getScene(key){
         let scene = this._scenes[key];

@@ -8,7 +8,6 @@ class EasyLoading extends BaseClass {
         this._content = null;
         this._uiBG = null;
         this._uiImageContainer = null;
-        this._timeKey = null;
         this._initView();
     }
 

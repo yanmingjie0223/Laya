@@ -9,9 +9,9 @@ class CommonUtils extends BaseClass {
 
     /**
      * 给字体添加描边
-     * @param lable  文字 {Laya.Lable|Laya.Text}
-     * @param color  表示文本的描边颜色 {string}
-     * @param width  描边宽度 {number}
+     * @param {Laya.Lable|Laya.Text} lable  文字
+     * @param {string} color  表示文本的描边颜色
+     * @param {number} width  描边宽度
      */
     addLableStrokeColor(lable, color, width) {
         lable.strokeColor = color;
@@ -20,7 +20,7 @@ class CommonUtils extends BaseClass {
 
     /**
      * 深度复制
-     * @param {any}
+     * @param {any} obj
      * @return {any}
      */
     copy(obj) {
@@ -42,8 +42,8 @@ class CommonUtils extends BaseClass {
 
     /**
      * 万字的显示
-     * @param label {Laya.Lable|Laya.Text}
-     * @param num {number}
+     * @param {Laya.Lable|Laya.Text} label
+     * @param {number} num
      */
     labelIsOverLenght (label, num) {
         let str = null;
@@ -59,7 +59,7 @@ class CommonUtils extends BaseClass {
 
     /**
      * int64转number
-     * @param obj {any}
+     * @param {any} obj
      * @return {number}
      */
     int64ToNumber(obj) {

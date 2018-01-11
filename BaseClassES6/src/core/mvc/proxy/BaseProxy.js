@@ -9,17 +9,17 @@ class BaseProxy {
 
     /**
      * 触发本模块消息
-     * @param key 唯一标识 {any}
-     * @param ...params:any[]
+     * @param {any} key 唯一标识
+     * @param ...args:any[]
      */
-    dispatch(key, ...params) {
+    dispatch(key, ...args) {
         return this._controller.dispatch.apply(this._controller, arguments);
     }
 
     /**
      * 触发其他模块消息
-     * @param controllerKey 模块标识 {number}
-     * @param key 唯一标识 {any}
+     * @param {number} controllerKey 模块标识
+     * @param {any} key 唯一标识
      * @param ...param:any[]
      */
     dispatchController(controllerKey, key) {
@@ -28,9 +28,9 @@ class BaseProxy {
 
     /**
      * 注册从服务器返回消息的监听
-     * @param cmd 消息标识 {any}
-     * @param callback 处理函数 {function}
-     * @param thisObj 处理函数所属对象 {any}
+     * @param {any} cmd 消息标识
+     * @param {Function} callback 处理函数
+     * @param {any} thisObj 处理函数所属对象
      */
     addListener(cmd, callback, thisObj) {
         App.MessageCenter.addListener(cmd, callback, thisObj);
@@ -38,9 +38,9 @@ class BaseProxy {
 
     /**
      * 注册从服务器返回消息的监听，仅一次，执行完成后删除
-     * @param cmd 消息标识 {string}
-     * @param callbackFunc 处理函数 {function}
-     * @param callbackObj 处理函数所属对象 {any}
+     * @param {string} cmd 消息标识
+     * @param {Function} callbackFunc 处理函数
+     * @param {any} callbackObj 处理函数所属对象
      */
     addListenerOnce(cmd, callbackFunc, callbackObj) {
         let callback = function() {
@@ -52,9 +52,9 @@ class BaseProxy {
 
     /**
      * 移除服务端返回消息的监听
-     * @param cmd 消息标识 {string}
-     * @param callbackFunc 处理函数 {function}
-     * @param callbackObj 处理函数所属对象 {any}
+     * @param {string} cmd 消息标识
+     * @param {Function} callbackFunc 处理函数
+     * @param {any} callbackObj 处理函数所属对象
      */
     removeListener(cmd, callbackFunc, callbackObj) {
         App.MessageCenter.removeListener(cmd, callbackFunc, callbackObj);
@@ -62,8 +62,8 @@ class BaseProxy {
 
     /**
      * 发送消息到Socket服务器
-     * @param cmd指令 {string}
-     * @param 消息参数内容 {Object}
+     * @param {string} cmd 指令
+     * @param {Object} msg 消息参数内容
      */
     sendSocketMsg(cmd, msg) {
         App.Socket.post(cmd, msg);
@@ -71,8 +71,8 @@ class BaseProxy {
 
     /**
      * 发送消息到Http服务端
-     * @param cmd 消息标识 例如: User.login {string}
-     * @param msg 消息参数 例如: let msg:any = {"uName":uName, "uPass":uPass}; {Object}
+     * @param {string} cmd 消息标识 例如: User.login
+     * @param {Object} msg 消息参数 例如: let msg:any = {"uName":uName, "uPass":uPass};
      */
     sendHttpMsg(cmd, msg) {
 

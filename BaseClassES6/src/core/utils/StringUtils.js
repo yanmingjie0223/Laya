@@ -2,14 +2,14 @@
 * name;
 */
 class StringUtils extends BaseClass {
-    
+
     constructor() {
         super();
     }
 
     /**
      * 去掉前后空格
-     * @param str {string}
+     * @param {string} str
      * @returns {string}
      */
     trimSpace(str) {
@@ -18,7 +18,7 @@ class StringUtils extends BaseClass {
 
     /**
      * 获取字符串长度，中文为2
-     * @param str {string}
+     * @param {string} str
      */
     getLength(str) {
         let strArr = str.split("");
@@ -36,7 +36,7 @@ class StringUtils extends BaseClass {
 
     /**
      * 判断一个字符串是否包含中文
-     * @param str {string}
+     * @param {string} str
      * @returns {boolean}
      */
     isChinese(str) {

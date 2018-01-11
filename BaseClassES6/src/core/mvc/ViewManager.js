@@ -14,7 +14,7 @@ class ViewManager extends BaseClass {
      * @param view
      */
     register(viewKey, view) {
-        if (this.isExists(viewKey)) 
+        if (this.isExists(viewKey))
             return;
         this._views[viewKey] = view;
     }
@@ -37,7 +37,7 @@ class ViewManager extends BaseClass {
     destroy(viewKey) {
         if (!this.isExists(viewKey))
             return;
-        
+
         let view = this._views[viewKey];
         delete this._views[viewKey];
 
@@ -47,37 +47,41 @@ class ViewManager extends BaseClass {
 
     /**
      * 控制显示view
-     * @param viewKey view唯一标识 {any}
-     * @param ...param:any[]
+     * @param {any} viewKey view唯一标识
+     * @param {BaseScene} scene 显示的主场景
+     * @param ...args:any[]
      */
-    show(viewKey, ...args) {
+    show(viewKey, scene = null, ...args) {
         if (!this.isExists(viewKey)) {
             Logger.trace("View " + viewKey + "不存在");
             return;
         }
-        
+        //发送参数到view中
+        let params = [scene];
+        params = params.concat(args);
+
         let view = this._views[viewKey];
-        view.show.apply(view, args);
+        view.show.apply(view, params);
     }
 
     /**
      * 控制关闭view
-     * @param viewKey view唯一标识 {any}
+     * @param {any} viewKey view唯一标识
      */
     close(viewKey) {
         if (!this.isExists(viewKey)) {
             Logger.trace("View " + viewKey + "不存在");
             return;
         }
-        
+
         let view = this._views[viewKey];
         view.close();
     }
 
     /**
      * 是否已经存在View
-     * @param viewKey 唯一标识 {any}
-     * @return {Boolean}
+     * @param {any} viewKey 唯一标识
+     * @return {boolean}
      */
     isExists(viewKey) {
         return !!this._views[viewKey];
@@ -85,7 +89,7 @@ class ViewManager extends BaseClass {
 
     /**
      * 获取指定View对象
-     * @param viewKey View唯一标识 {any}
+     * @param {any} viewKey View唯一标识
      * @returns {BaseView}
      */
     getView(viewKey) {

@@ -9,10 +9,10 @@ class EffectUtils extends BaseClass {
 
     /**
      * 类似mac上图标上下抖动的效果
-     * @param obj抖动对象 {Sprite}
-     * @param initY 要抖动的对象的初始Y值，原始位置 {number}
-     * @param 抖动动画完成回调函数 {function}
-     * @param 回调函数this对象 {any}
+     * @param {Sprite} obj 抖动对象
+     * @param {number} initY 要抖动的对象的初始Y值，原始位置
+     * @param {Function} callback 抖动动画完成回调函数
+     * @param {any} thisObj 回调函数this对象
      */
     macIconShake(obj, initY, callback, thisObj) {
         //抖动频率[时间，移动距离]，可修改
@@ -42,12 +42,12 @@ class EffectUtils extends BaseClass {
 
     /**
      * 向上移动淡出（弹出框）
-     * @param 淡出对象 {Sprite}
-     * @param 淡出时间 {number}
-     * @param 淡出函数 {function}
-     * @param 淡出完成回调函数 {function}
-     * @param 回调函数this对象 {any}
-     * @param 回调传参 {Array}
+     * @param {Sprite} obj 淡出对象
+     * @param {number} time 淡出时间
+     * @param {Function} ease 淡出函数
+     * @param {Function} callback 淡出完成回调函数
+     * @param {any} thisObj 回调函数this对象
+     * @param {Array} arrData 回调传参
      */
     flowOut(obj, time = 500, ease = null, callback = null, thisObj = null, arrData = null){
         if(callback){
@@ -58,9 +58,37 @@ class EffectUtils extends BaseClass {
     }
 
     /**
+     * 文本数字增减效果
+     * @param {number} startNum 开始数值
+     * @param {number} endNum 渐变到的数值
+     * @param {Function} callback 淡出完成回调函数
+     * @param {any} thisObj 回调函数this对象
+     */
+    flowNum(startNum, endNum, callback, thisObj = null) {
+        let change = Math.abs(endNum - startNum);
+        if (change <= 0) return;
+        let everyChange = change / (endNum - startNum);
+        let currNum = startNum;
+        let timer = new Laya.Timer();
+        timer.loop(30, this, changeFun);
+
+        function changeFun() {
+            currNum += everyChange;
+            --change;
+            if (change < 0) {
+                timer.clearAll(this);
+                timer = null;
+            }
+            else {
+                callback && callback.apply(thisObj, [currNum]);
+            }
+        }
+    }
+
+    /**
      * 开始闪烁
-     * @param obj {Sprite}
-     * @param 闪烁频率 {number}
+     * @param {Sprite} obj
+     * @param {number} alphaTime 闪烁频率
      */
     startFlicker(obj, alphaTime = 700) {
         obj.alpha = 1;
@@ -71,9 +99,9 @@ class EffectUtils extends BaseClass {
 
     /**
      * 停止动画所有动画后容器位置初始化到原位，否则可能出现位置改变的bug
-     * @param obj {Sprite}
-     * @param xPos {number}
-     * @param yPos {number}
+     * @param {Sprite} obj
+     * @param {number} xPos
+     * @param {number} yPos
      */
     stopEffect(obj, xPos = null, yPos = null) {
         Laya.Tween.clearAll(obj);

@@ -11,9 +11,9 @@ class FontManager extends BaseClass {
 
     /**
      * 注册纹理字体
-     * @param fontUrl配置文件      {string}
-     * @param fontPngUrl纹理地址   {string}
-     * @param fontName   {string}
+     * @param {string} fontUrl 配置文件
+     * @param {string} fontPngUrl 纹理地址
+     * @param {string} fontName
      */
     register(fontUrl, fontPngUrl, fontName) {
         if(this._fontCache && this._fontCache[fontName]){
@@ -38,7 +38,7 @@ class FontManager extends BaseClass {
 
     /**
      * 注销纹理字体
-     * @param fontName   {string}
+     * @param {string} fontName
      */
     unregister(fontName) {
         if(this._fontCache && this._fontCache[fontName]){
@@ -48,7 +48,7 @@ class FontManager extends BaseClass {
 
     /**
      * 查看是否已经注册该字体
-     * @param fontName   {string}
+     * @param {string} fontName
      */
     isRegister(fontName) {
         if(this._fontCache && this._fontCache[fontName]){

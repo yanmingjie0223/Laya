@@ -9,11 +9,11 @@ class StageUtils extends BaseClass {
 
     /**
      * 初始化舞台
-     * @param isWebGL {boolean}
-     * @param isDebug {boolean}
-     * @param width   {number}
-     * @param height  {number}
-     * @param color   {string}
+     * @param {boolean} isWebGL
+     * @param {boolean} isDebug
+     * @param {number} width
+     * @param {number} height
+     * @param {string} color
      */
     init(isWebGL = true, isDebug = App.DebugUtils.isDebug, width = 1334, height = 750, color = "#808080"){
         //游戏舞台初始化渲染方式：WebGL和canvas（默认canvas）

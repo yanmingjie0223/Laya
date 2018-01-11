@@ -5,6 +5,7 @@ class ControllerManager extends BaseClass {
 
     constructor() {
         super();
+        //所有模块
         this._modules = {};
     }
 
@@ -17,8 +18,8 @@ class ControllerManager extends BaseClass {
 
     /**
      * 动态添加的Controller
-     * @param controllerKey 唯一标识 {any}
-     * @param controller {BaseController}
+     * @param {any} controllerKey 唯一标识
+     * @param {BaseController} controller
      */
     register(controllerKey, controller) {
         if (this.isExists(controllerKey))
@@ -28,7 +29,7 @@ class ControllerManager extends BaseClass {
 
     /**
      * 动态移除Controller
-     * @param controllerKey 唯一标识 {any}
+     * @param {any} controllerKey 唯一标识
      */
     unregister(controllerKey) {
         if (!this.isExists(controllerKey))
@@ -39,7 +40,7 @@ class ControllerManager extends BaseClass {
 
     /**
      * 是否已经存在Controller
-     * @param controllerKey 唯一标识 {any}
+     * @param {any} controllerKey 唯一标识
      * @return {Boolean}
      */
     isExists(controllerKey) {
@@ -48,8 +49,8 @@ class ControllerManager extends BaseClass {
 
     /**
      * 跨模块消息传递
-     * @param controllerKey Controller唯一标识 {any}
-     * @param key 消息唯一标识 {any}
+     * @param {any} controllerKey Controller唯一标识
+     * @param {any} key 消息唯一标识
      * @param ...param:any[]
      */
     dispatchController(controllerKey, ...args){
@@ -65,7 +66,7 @@ class ControllerManager extends BaseClass {
 
     /**
      * 获取指定Controller的Model对象
-     * @param controllerKey Controller唯一标识 {any}
+     * @param {any} controllerKey Controller唯一标识
      * @returns {BaseModel}
      */
     getControllerModel(controllerKey){
@@ -78,7 +79,7 @@ class ControllerManager extends BaseClass {
 
     /**
      * 获取指定Controller对象
-     * @param controllerKey Controller唯一标识 {any}
+     * @param {any} controllerKey Controller唯一标识
      * @returns {BaseController}
      */
     getController(controllerKey){

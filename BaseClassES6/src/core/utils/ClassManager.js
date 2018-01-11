@@ -11,7 +11,7 @@ class ClassManager extends BaseClass {
 
     /**
      * 触发本模块消息
-     * @param key 唯一标识 {any}
+     * @param {any} Class 唯一标识 
      * @param ...param:any[]
      */
     getClass(Class) {
@@ -28,6 +28,10 @@ class ClassManager extends BaseClass {
         return _cla;
     }
 
+    /**
+     * 删除指定类单例
+     * @param {any} Class 
+     */
     clear(Class) {
         if (!this._cache) {
             return;
@@ -46,7 +50,7 @@ class ClassManager extends BaseClass {
 
     /**
      * 获取类实类对象，传入类实参
-     * @param args ...args {Array}
+     * @param {Array} args ...args 
      */
     _getClass(args) {
         let params = [];

@@ -3,23 +3,26 @@
 */
 class BaseView extends BaseSprite {
 
-    constructor(controller, scene) {
+    /**
+     * 构造函数
+     * @param {BaseController} controller
+     * @param {BaseScene} scene
+     */
+    constructor(controller, scene = App.StageUtils.stage) {
         super();
-        
+
         this._controller = controller;
         this._scene = scene;
         this._isInit = false;
         this._resouce = null;
         //初始化这个view需要的资源
         this.initRes();
-
-        App.StageUtils.stage.on(Laya.Event.RESIZE, this, this.onResize);
     }
 
     /**
      * 触发本模块消息
-     * @param key 唯一标识 {any}
-     * @param ...params:any[]
+     * @param {any} key 唯一标识
+     * @param ...args:any[]
      */
     dispatch(...args) {
         return this._controller.dispatch.apply(this._controller, args);
@@ -27,9 +30,9 @@ class BaseView extends BaseSprite {
 
     /**
      * 触发其他模块消息
-     * @param controllerKey 模块标识 {number}
-     * @param key 唯一标识 {any}
-     * @param ...params:any[]
+     * @param {number} controllerKey 模块标识
+     * @param {any} key 唯一标识
+     * @param ...args:any[]
      */
     dispatchController(...args) {
         return this._controller.dispatchController.apply(this._controller, args);
@@ -47,7 +50,7 @@ class BaseView extends BaseSprite {
      * 对面板进行显示初始化，用于子类继承
      */
     initView() {
-        
+
     }
 
     /**
@@ -59,12 +62,12 @@ class BaseView extends BaseSprite {
 
     /**
      * 面板开启执行函数，用于子类继承
-     * @param 居中处理
-     * @param 场景如果不需要更换指定场景，传值为null
+     * @param {BaseScene} scene 场景如果不需要更换指定场景，传值为null
+     * @param {boolean} center 居中处理
      * @param ...param:any[]
      */
-    show(center = false, scene = null){
-        //该view界面居中情况        
+    show(scene = null, center = false){
+        //该view界面居中情况
         if (center) {
             this.x = (App.StageUtils.stageW - this.width) / 2;
             this.y = (App.StageUtils.stageH - this.height) / 2;
@@ -75,18 +78,23 @@ class BaseView extends BaseSprite {
         if (this._scene) {
             this._scene.addView(this);
         }
+        //resize尺寸变化监听事件
+        App.StageUtils.stage.off(Laya.Event.RESIZE, this, this.onResize);
+        App.StageUtils.stage.on(Laya.Event.RESIZE, this, this.onResize);
     }
 
     /**
      * 面板关闭执行函数，用于子类继承
-     * @param ...params:any[]
+     * @param ...args:any[]
      */
     close(...args) {
-        if(this._scene){
+        if (this._scene) {
             this._scene.removeView(this);
-        }else{
+        }
+        else {
             this.removeSelf();
         }
+        App.StageUtils.stage.off(Laya.Event.RESIZE, this, this.onResize);
     }
 
     /**
@@ -105,12 +113,12 @@ class BaseView extends BaseSprite {
 
     /**
      * 加载面板所需资源
-     * @param callback {function}
-     * @param thisObj {any}
+     * @param {Function} callback
+     * @param {any} thisObj
      */
     loadResource(callback, thisObj) {
         let self = this;
-        if(!self.resouce || self.resouce.length <= 0){
+        if (!self.resouce || self.resouce.length <= 0) {
             return;
         }
         App.EasyLoading.show();
@@ -138,7 +146,7 @@ class BaseView extends BaseSprite {
         App.StageUtils.stage.off(Laya.Event.RESIZE, this, this.onResize);
         super.destroy(isDesChild);
     }
-    
+
     /**
      * 获取设置是否初始化
      */

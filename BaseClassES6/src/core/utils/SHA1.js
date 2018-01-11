@@ -10,9 +10,9 @@ class SHA1 extends BaseClass {
     }
 
     /**
-     * string encrypt 
-     * @param s that needs to be encrypted
-     * @param hexcase format: 0 - lowercase; 1 - uppercase (The default lowercase)
+     * string encrypt
+     * @param {string} s that needs to be encrypted
+     * @param {number} hexcase format: 0 - lowercase; 1 - uppercase (The default lowercase)
      */
     encrypt(s, hexcase = 0){
         this.hexcase = hexcase;
@@ -25,7 +25,7 @@ class SHA1 extends BaseClass {
         //加密小写
         return this.hex_sha1("abc").toLowerCase() == "a9993e364706816aba3e25717850c26c9cd0d89d";
     };
-    
+
     hex_sha1 (s) {return this.rstr2hex(this.rstr_sha1(this.str2rstr_utf8(s)));};
     b64_sha1 (s) { return this.rstr2b64(this.rstr_sha1(this.str2rstr_utf8(s))); };
     any_sha1 (s, e) { return this.rstr2any(this.rstr_sha1(this.str2rstr_utf8(s)), e); };

@@ -19,9 +19,9 @@ class MD5 extends BaseClass{
     }
 
     /**
-     * string encrypt 
-     * @param string that needs to be encrypted
-     * @param output format: 0 - lowercase; 1 - uppercase (The default lowercase)
+     * string encrypt
+     * @param {string} s that needs to be encrypted
+     * @param {number} output format: 0 - lowercase; 1 - uppercase (The default lowercase)
      */
     encrypt(s, hexcase = 0){
         this.hexcase = hexcase;

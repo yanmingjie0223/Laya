@@ -10,7 +10,7 @@ class ArrayUtils extends BaseClass {
     /**
      * 遍历操作，目前浏览器基本上支持es6 数组自带forEach方法
      * @param {Array} arr
-     * @param {function} callback {function}
+     * @param {Function} callback
      * @param {any} thisObj
      */
     forEach(arr, callback, thisObj) {

@@ -17,7 +17,7 @@ class HomeScene extends BaseScene {
         App.ControllerManager.register(ControllerConst.HOME, new HomeController());
 
         //控制显示view
-        App.ViewManager.show(ViewConst.HOME);
+        App.ViewManager.show(ViewConst.HOME, this);
     }
 
     /**

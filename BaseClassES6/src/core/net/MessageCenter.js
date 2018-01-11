@@ -17,9 +17,9 @@ class MessageCenter extends BaseClass {
 
     /**
      * 添加消息监听
-     * @param cmd 消息唯一标识 {string}
-     * @param listener 侦听函数 {function}
-     * @param listenerObj 侦听函数所属对象 {any}
+     * @param {string} cmd 消息唯一标识
+     * @param {Function} listener 侦听函数
+     * @param {any} listenerObj 侦听函数所属对象
      */
     addListener(cmd, listener, listenerObj) {
         let arr = this.dict[cmd];
@@ -31,6 +31,7 @@ class MessageCenter extends BaseClass {
         //检测是否已经存在
         for (let i = 0, len = arr.length; i < len; i++) {
             if (arr[i][0] == listener && arr[i][1] == listenerObj) {
+                Logger.trace("监听指令和函数都存在！");
                 return;
             }
         }
@@ -40,9 +41,9 @@ class MessageCenter extends BaseClass {
 
     /**
      * 移除消息监听
-     * @param cmd 消息唯一标识 {string}
-     * @param listener 侦听函数 {function}
-     * @param listenerObj 侦听函数所属对象 {any}
+     * @param {string} cmd 消息唯一标识
+     * @param {Function} listener 侦听函数
+     * @param {any} listenerObj 侦听函数所属对象
      */
     removeListener(cmd, listener, listenerObj) {
         let arr = this.dict[cmd];
@@ -64,9 +65,22 @@ class MessageCenter extends BaseClass {
     }
 
     /**
+     * 移除cmd消息所有监听
+     * @param {string} cmd 消息唯一标识
+     */
+    removeAllListener(cmd) {
+        let arr = this.dict[cmd];
+        if (!arr) {
+            return;
+        }
+        this.dict[cmd] = null;
+        delete this.dict[cmd];
+    }
+
+    /**
      * 触发消息
-     * @param cmd 消息唯一标识 {string}
-     * @param param 消息参数 {any}
+     * @param {string} cmd 消息唯一标识
+     * @param {any} param 消息参数
      */
     dispatch(cmd, param) {
         if (!this.dict[cmd]) { return; }
@@ -79,7 +93,7 @@ class MessageCenter extends BaseClass {
 
     /**
      * 处理一条消息
-     * @param msgVo {MessageVo}
+     * @param {MessageVo} msgVo
      */
     dealMsg(msgVo) {
         let cmd = msgVo.cmd;

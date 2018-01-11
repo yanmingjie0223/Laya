@@ -27,7 +27,7 @@ class BaseScene extends BaseSprite {
 
     /**
      * 添加一个view到舞台
-     * @param view {Laya.Sprite}
+     * @param {Laya.Sprite} view
      */
     addView(view) {
         if (this.destroyed) return;
@@ -51,7 +51,7 @@ class BaseScene extends BaseSprite {
 
     /**
      * 在舞台移除一个view
-     * @param view {Laya.Sprite}
+     * @param {Laya.Sprite} view
      */
     removeView(view) {
         let index = this._views.indexOf(view);
