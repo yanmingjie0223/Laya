@@ -12,8 +12,7 @@ class BaseFloatView extends BaseView {
     show(scene = null, center = true){
         super.show(arguments);
         this.parent.addChildAt(this.bg, this.parent.getChildIndex(this));
-        this.bg.pos(0, 0);
-        this.bg.size(App.StageUtils.stageW, App.StageUtils.stageH);
+        this.onResize();
     }
 
     close(){
@@ -28,18 +27,23 @@ class BaseFloatView extends BaseView {
      */
     size(_width, _height) {
         super.size(_width, _height);
-        this.onResize();
+    }
+
+    /**
+     * 背景适配
+     */
+    _onResize() {
+        this.bg.pos(0, 0);
+        this.bg.graphics.clear();
+        this.bg.graphics.drawRect(0, 0, App.StageUtils.stageW, App.StageUtils.stageH);
+        this.bg.size(App.StageUtils.stageW, App.StageUtils.stageH);
     }
 
     /**
      * 重写适配，继承后的类如果有修改就继承重写
      */
     onResize() {
-        this.bg.pos(0, 0);
-        this.bg.graphics.clear();
-        this.bg.graphics.drawRect(0, 0, App.StageUtils.stageW, App.StageUtils.stageH);
-        this.bg.size(App.StageUtils.stageW, App.StageUtils.stageH);
-        //浮层内容居中
+        this._onResize();
         this.x = (App.StageUtils.stageW - this.width) >> 1;
         this.y = (App.StageUtils.stageH - this.height) >> 1;
     }
@@ -82,6 +86,7 @@ class BaseFloatView extends BaseView {
     destroy(isDesChild = true){
         super.destroy(isDesChild);
         this._bg.graphics.clear();
+        this._bg.destroy(true);
         this._bg = null;
     }
 

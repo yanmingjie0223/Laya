@@ -27,7 +27,7 @@ class ArrayUtils extends BaseClass {
         let len = arr.length;
         let index;
         let tmp;
-        for(let i=len-1; i >= 0; i--) {
+        for(let i = len - 1; i >= 0; i--) {
             index = (Math.random() * i)|0;
             tmp = arr[i];
             arr[i] = arr[index];

@@ -73,13 +73,12 @@ class BaseView extends BaseSprite {
             this.y = (App.StageUtils.stageH - this.height) / 2;
         }
         if (scene) {
-            this._scene = scene;
+            this.scene = scene;
         }
-        if (this._scene) {
-            this._scene.addView(this);
+        if (this.scene) {
+            this.scene.addView(this);
         }
         //resize尺寸变化监听事件
-        App.StageUtils.stage.off(Laya.Event.RESIZE, this, this.onResize);
         App.StageUtils.stage.on(Laya.Event.RESIZE, this, this.onResize);
     }
 
@@ -88,8 +87,8 @@ class BaseView extends BaseSprite {
      * @param ...args:any[]
      */
     close(...args) {
-        if (this._scene) {
-            this._scene.removeView(this);
+        if (this.scene) {
+            this.scene.removeView(this);
         }
         else {
             this.removeSelf();
@@ -143,6 +142,7 @@ class BaseView extends BaseSprite {
         this._isInit = false;
         this._resouce = null;
         this._controller = null;
+        this._scene = null;
         App.StageUtils.stage.off(Laya.Event.RESIZE, this, this.onResize);
         super.destroy(isDesChild);
     }
