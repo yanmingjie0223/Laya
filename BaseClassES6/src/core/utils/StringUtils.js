@@ -19,6 +19,7 @@ class StringUtils extends BaseClass {
     /**
      * 获取字符串长度，中文为2
      * @param {string} str
+     * @returns {number}
      */
     getLength(str) {
         let strArr = str.split("");

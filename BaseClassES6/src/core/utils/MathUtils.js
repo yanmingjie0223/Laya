@@ -98,8 +98,9 @@ class MathUtils extends BaseClass {
      * 精确到小数点后多少位（舍尾）
      * @param {number} 精确值
      * @param {number} 精确位数
+     * @return {number}
      * */
-    exactCount (exactValue, count = 0) {
+    exactCount(exactValue, count = 0) {
         let num = Math.pow(10, count);
         let value = (exactValue * num) | 0;
         return value / num;
@@ -111,8 +112,9 @@ class MathUtils extends BaseClass {
      * @param {Point} p1控制点
      * @param {Point} p2终点
      * @param {number} t [0-1]区间
+     * @return {number}
      * */
-    getBezierCutAngle (p0, p1, p2, t) {
+    getBezierCutAngle(p0, p1, p2, t) {
         let _x = 2 * (p0.x * (t - 1) + p1.x * (1 - 2 * t) + p2.x * t);
         let _y = 2 * (p0.y * (t - 1) + p1.y * (1 - 2 * t) + p2.y * t);
         let angle = this.getAngle( Math.atan2(_y, _x) );
@@ -126,8 +128,9 @@ class MathUtils extends BaseClass {
      * @param {Point} p2 终点
      * @param {number} t [0-1]区间
      * @param {Point} 缓存的点对象，如不存在则生成新的点对象
+     * @return {Laya.Point}
      * */
-    getBezierPoint (p0, p1, p2, t, point = null) {
+    getBezierPoint(p0, p1, p2, t, point = null) {
         if (!point) {
             point = new Laya.Point();
         }

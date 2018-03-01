@@ -79,6 +79,7 @@ class BaseView extends BaseSprite {
             this.scene.addView(this);
         }
         //resize尺寸变化监听事件
+        this.onResize();
         App.StageUtils.stage.on(Laya.Event.RESIZE, this, this.onResize);
     }
 
@@ -116,18 +117,17 @@ class BaseView extends BaseSprite {
      * @param {any} thisObj
      */
     loadResource(callback, thisObj) {
-        let self = this;
-        if (!self.resouce || self.resouce.length <= 0) {
+        if (!this.resouce || this.resouce.length <= 0) {
             return;
         }
         App.EasyLoading.show();
-        if (!self.isInit) {
-            App.ResourceUtils.loadResource(self.resouce, function () {
-                self.isInit = true;
-                self.initView();
+        if (!this.isInit) {
+            App.ResourceUtils.loadResource(this.resouce, () => {
+                this.isInit = true;
+                this.initView();
                 App.EasyLoading.close();
                 (callback) && (callback.call(thisObj));
-            }, null, self);
+            }, null, null);
         }
         else {
             App.EasyLoading.close();

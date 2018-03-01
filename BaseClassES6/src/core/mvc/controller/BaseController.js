@@ -23,7 +23,7 @@ class BaseController {
      * @param {any} key 唯一标识
      */
     removeListener(key){
-        if(this._messages && this._messages[key]){
+        if (this._messages && this._messages[key]) {
             delete this._messages[key]
         }
     }

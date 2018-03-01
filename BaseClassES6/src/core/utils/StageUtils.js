@@ -15,7 +15,7 @@ class StageUtils extends BaseClass {
      * @param {number} height
      * @param {string} color
      */
-    init(isWebGL = true, isDebug = App.DebugUtils.isDebug, width = 1334, height = 750, color = "#808080"){
+    init(isWebGL = true, isDebug = App.DebugUtils.isDebug, width = 1334, height = 750, color = "#808080") {
         //游戏舞台初始化渲染方式：WebGL和canvas（默认canvas）
         if (isWebGL) {
             Laya.init(width, height, Laya.WebGL);
