@@ -27,9 +27,10 @@ class EffectUtils extends BaseClass {
         toShake();
 
         function toShake(){
-            if(index >= arr.length) {
+            if (index >= arr.length) {
                 (callback) && ( callback.apply(thisObj, []) );
-            }else{
+            }
+            else {
                 Laya.Tween.to(obj, {"y":initY-arr[index][0]}, arr[index][1], null, Laya.Handler.create(null, function(){
                     Laya.Tween.to(obj, {"y":initY}, arr[index][1], null, Laya.Handler.create(null, function(){
                         ++index;
@@ -50,9 +51,10 @@ class EffectUtils extends BaseClass {
      * @param {Array} arrData 回调传参
      */
     flowOut(obj, time = 500, ease = null, callback = null, thisObj = null, arrData = null){
-        if(callback){
+        if (callback) {
             Laya.Tween.to(obj, {y:obj.y-150, alpha:0}, time, ease, Laya.Handler.create(thisObj, callback, arrData));
-        }else{
+        }
+        else {
             Laya.Tween.to(obj, {y:obj.y-150, alpha:0}, time, ease, Laya.Handler.create(obj, obj.removeSelf, arrData));
         }
     }
@@ -105,9 +107,48 @@ class EffectUtils extends BaseClass {
      */
     stopEffect(obj, xPos = null, yPos = null) {
         Laya.Tween.clearAll(obj);
-        if(xPos !== null && yPos !== null){
+        if (xPos !== null && yPos !== null) {
             obj.pos(xPos, yPos);
         }
+    }
+
+    /**
+     * 点击放大缩小效果
+     * @param {Laya.Sprite}
+     * @param {boolean} isChangeXY 如果中心点是锚点不需要修改位置
+     */
+    clickEffect(sp, isChangeXY = true) {
+        if (!sp) return;
+        sp.off(Laya.Event.MOUSE_DOWN, this, this.cubicInOutEffect);
+        sp.on(Laya.Event.MOUSE_DOWN, this, this.cubicInOutEffect, [sp, isChangeXY]);
+    }
+    clearClickEffect() {
+        if (!sp) return;
+        sp.off(Laya.Event.MOUSE_DOWN, this, this.cubicInOutEffect);
+    }
+    cubicInOutEffect(sp, isChangeXY) {
+        if (sp._aniButtonEffect) return;
+        sp._aniButtonEffect = true;
+        let _x = sp.x;
+        let _y = sp.y;
+        let _scaX = sp.scaleX;
+        let _scaY = sp.scaleY;
+        let _bigX, _bigY;
+        if (!isChangeXY) {
+            _bigX = _x - ((sp.width * 0.1) >> 1);
+            _bigY = _y - ((sp.height * 0.1) >> 1);
+        }
+        else {
+            _bigX = _x;
+            _bigY = _y;
+        }
+        Laya.Tween.to(sp, {x: _bigX, y: _bigY, scaleX: 1.1 * _scaX, scaleY: 1.1 * _scaY}, 100, null, Laya.Handler.create(this, () => {
+            Laya.Tween.to(sp, {x: _x, y: _y, scaleX: _scaX, scaleY: _scaY}, 100, null, Laya.Handler.create(this, () => {
+                if (!sp.destroyed) {
+                    sp._aniButtonEffect = false;
+                }
+            }));
+        }));
     }
 
 }

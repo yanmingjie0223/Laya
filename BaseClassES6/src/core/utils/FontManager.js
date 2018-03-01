@@ -16,13 +16,13 @@ class FontManager extends BaseClass {
      * @param {string} fontName
      */
     register(fontUrl, fontPngUrl, fontName) {
-        if(this._fontCache && this._fontCache[fontName]){
+        if (this._fontCache && this._fontCache[fontName]) {
             return;
         }
 
         let fontFntData = Laya.Loader.getRes(fontUrl);
         let fontPngData = Laya.Loader.getRes(fontPngUrl);
-        if(!fontFntData || !fontPngData){
+        if (!fontFntData || !fontPngData) {
             Logger.trace("注册纹理字体文件未加载！", fontUrl, fontPngUrl);
         }
 
@@ -30,7 +30,7 @@ class FontManager extends BaseClass {
         bitmapFont.parseFont(fontFntData, fontPngData);
         Laya.Text.registerBitmapFont(fontName, bitmapFont);
 
-        if(!this._fontCache){
+        if (!this._fontCache) {
             this._fontCache = {};
         }
         this._fontCache[fontName] = true;
@@ -41,7 +41,7 @@ class FontManager extends BaseClass {
      * @param {string} fontName
      */
     unregister(fontName) {
-        if(this._fontCache && this._fontCache[fontName]){
+        if (this._fontCache && this._fontCache[fontName]) {
             delete this._fontCache[fontName];
         }
     }
@@ -51,7 +51,7 @@ class FontManager extends BaseClass {
      * @param {string} fontName
      */
     isRegister(fontName) {
-        if(this._fontCache && this._fontCache[fontName]){
+        if (this._fontCache && this._fontCache[fontName]) {
             return true;
         }
         return null;

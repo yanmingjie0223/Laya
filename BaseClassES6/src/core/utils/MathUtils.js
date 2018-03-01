@@ -47,31 +47,34 @@ class MathUtils extends BaseClass {
         let vx = p2.x - p1.x;
         let ang;
 
-        if(vy == 0){
-            if(vx < 0){
+        if (vy == 0) {
+            if (vx < 0) {
                 return 180;
             }
             return 0;
         }
 
-        if(vx == 0){ //正切是vy/vx所以vx==0排除
-            if(vy > 0){
+        if (vx == 0){ //正切是vy/vx所以vx==0排除
+            if (vy > 0) {
                 ang = 90;
-            }else if(vy < 0){
+            }
+            else if (vy < 0) {
                 ang = 270;
             }
             return ang;
         }
 
         ang = this.getAngle( Math.atan( Math.abs(vy)/Math.abs(vx) ) );
-        if(vx > 0){
-            if(vy < 0){
+        if (vx > 0) {
+            if (vy < 0) {
                 ang = 360 - ang;
             }
-        }else{
-            if(vy > 0){
+        }
+        else {
+            if (vy > 0) {
                 ang = 180 - ang;
-            }else{
+            }
+            else {
                 ang = 180 + ang;
             }
         }

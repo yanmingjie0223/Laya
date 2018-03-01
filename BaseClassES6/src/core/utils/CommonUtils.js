@@ -27,9 +27,11 @@ class CommonUtils extends BaseClass {
         let newObj;
         if (obj instanceof Array) {
             newObj = [];
-        }else if (obj instanceof Object) {
+        }
+        else if (obj instanceof Object) {
             newObj = {};
-        }else {
+        }
+        else {
             return obj;
         }
         let keys = Object.keys(obj);
@@ -49,9 +51,11 @@ class CommonUtils extends BaseClass {
         let str = null;
         if (num < 10000) {
             str = num + "";
-        }else if (num < 10000 * 1000) {
+        }
+        else if (num < 10000 * 1000) {
             str = Math.floor(num / 10000).toString() + "万";
-        }else {
+        }
+        else {
             str = Math.floor(num / 10000000).toString() + "千万";
         }
         label.text = str;

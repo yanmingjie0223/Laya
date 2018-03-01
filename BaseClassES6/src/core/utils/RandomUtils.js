@@ -14,10 +14,10 @@ class RandomUtils extends BaseClass {
      * @returns {number}
      */
     limit(from, end) {
-        from = Math.min(from, end);
-        end = Math.max(from, end);
-        let range = end - from;
-        return from + Math.random() * range;
+        let min = Math.min(from, end);
+        let max = Math.max(from, end);
+        let range = max - min;
+        return min + Math.random() * range;
     }
 
     /**
@@ -26,7 +26,7 @@ class RandomUtils extends BaseClass {
      * @returns 随机出来的结果
      */
     randomArray(arr) {
-        let index = Math.floor(Math.random() * arr.length);
+        let index = (Math.random() * arr.length) | 0;
         return arr[index];
     }
 

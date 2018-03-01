@@ -65,9 +65,9 @@ class BaseSocket extends BaseEventDispatcher {
                     Logger.trace("连接已关闭", self.data.connectionUrl);
                     self.event("onEnd");
                 });
-
             });
-        } catch (e) {
+        } 
+        catch (e) {
             self.primus = null;
             Logger.trace(e);
         }
@@ -87,7 +87,8 @@ class BaseSocket extends BaseEventDispatcher {
         let parsedData;
         try {
             parsedData = JSON.parse(dataString);
-        } catch(e) {
+        } 
+        catch(e) {
             Logger.trace(data);
             Logger.trace(dataString);
             throw e;
@@ -96,7 +97,8 @@ class BaseSocket extends BaseEventDispatcher {
         //更新jwt token
         if (parsedData.cmd == "conn:init") {
             self.data.jwtToken = parsedData.rep;
-        } else {
+        } 
+        else {
             self.event(parsedData.cmd, parsedData.rep);
         }
 
@@ -107,7 +109,8 @@ class BaseSocket extends BaseEventDispatcher {
         //为data增加token
         if (data.params) {
             data.params.token = self.data.jwtToken;
-        } else {
+        } 
+        else {
             data.params = {token: self.data.jwtToken};
         }
         data.status = {time: new Date().getTime()};
@@ -160,7 +163,8 @@ class BaseSocket extends BaseEventDispatcher {
             this.keyCount = this.keyCount? this.keyCount+1: 0;
             // Logger.trace("初始化可以次数", this.keyCount);
             this.data._commKey = Date.parse(new Date()).toString() + Date.parse(new Date()).toString() + Date.parse(new Date()).toString().substring(0, 6);
-        } catch (e) {
+        } 
+        catch (e) {
             Logger.trace("初始化commKey失败", e);
         }
     }
@@ -173,7 +177,8 @@ class BaseSocket extends BaseEventDispatcher {
             let jsencrypt = new JSEncrypt();
             jsencrypt.setPublicKey(self.data.publicKey);
             self.data.encryptedString = jsencrypt.encrypt(params);
-        } catch (e) {
+        } 
+        catch (e) {
             Logger.trace("初始化encryptedString失败", e);
         }
     }

@@ -9,13 +9,13 @@ class BaseFloatView extends BaseView {
         this._bgAlpha = 0.3;
     }
 
-    show(scene = null, center = true){
+    show(scene = null, center = true) {
         super.show(arguments);
         this.parent.addChildAt(this.bg, this.parent.getChildIndex(this));
         this.onResize();
     }
 
-    close(){
+    close() {
         super.close(arguments);
         this.bg.removeSelf();
     }
@@ -51,7 +51,7 @@ class BaseFloatView extends BaseView {
     /**
      * 重写层级关系、浮层在上面
      */
-    getLayer () {
+    getLayer() {
         return ViewType.LAYER_MWINDOW;
     }
 

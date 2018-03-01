@@ -37,7 +37,8 @@ class BaseController {
         let listen = this._messages[key];
         if (listen) {
             return listen[0].apply(listen[1], args);
-        } else {
+        } 
+        else {
             Logger.trace("消息" + key + "不存在侦听");
             return null;
         }

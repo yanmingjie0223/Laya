@@ -149,7 +149,7 @@ class DisplayUtils extends BaseClass {
         (labelSize != null) && (btn.labelSize = labelSize);
         btn.label = text;
         btn.pos(xPos, yPos);
-        if(parent){
+        if (parent) {
             parent.addChild(btn);
         }
         return btn;
@@ -165,10 +165,10 @@ class DisplayUtils extends BaseClass {
      */
     createSkeleton(xPos, yPos, skKey, type, parent = null){
         let templet = this.createTemplet(skKey);
-        if(templet){
+        if (templet) {
             let skeleton = templet.buildArmature(type);
             skeleton.pos(xPos, yPos);
-            if(parent) {
+            if (parent) {
                 parent.addChild(skeleton);
             }
             return skeleton;
@@ -188,9 +188,10 @@ class DisplayUtils extends BaseClass {
      */
     createAsynSkeleton(skKey, type, callback = null, thisObj = null){
         let templet = this.createTemplet(skKey);
-        if(templet){
+        if (templet) {
             compleSk();
-        }else{
+        }
+        else {
             let res = [
                 {"type": Laya.Loader.BUFFER, "url": skKey + ".sk"},
                 {"type": Laya.Loader.IMAGE,  "url": skKey + ".png"}
@@ -242,10 +243,10 @@ class DisplayUtils extends BaseClass {
      * @param {Laya.Image|Laya.Sprite} 显示纹理容器对象
      */
     imageToTexture(textureUrl, image){
-        if(image instanceof Laya.Image){
+        if (image instanceof Laya.Image) {
             image.source = Laya.loader.getRes(textureUrl);
-            if(!image.source){
-                this.imageUrlLoad(textureUrl, function(){
+            if (!image.source){
+                this.imageUrlLoad(textureUrl, function() {
                     image.source = Laya.loader.getRes(textureUrl);
                     if (!image.destroyed && image.source) {
                         image.size(image.source.sourceWidth, image.source.sourceHeight);
@@ -253,10 +254,10 @@ class DisplayUtils extends BaseClass {
                 }, null);
             }
         }
-        else if(image instanceof Laya.Sprite){
+        else if (image instanceof Laya.Sprite) {
             image.texture = Laya.loader.getRes(textureUrl);
-            if(!image.texture) {
-                this.imageUrlLoad(textureUrl, function(){
+            if (!image.texture) {
+                this.imageUrlLoad(textureUrl, function() {
                     image.texture = Laya.loader.getRes(textureUrl);
                     if (!image.destroyed && image.texture) {
                         image.size(image.texture.sourceWidth, image.texture.sourceHeight);

@@ -37,7 +37,7 @@ class ProtobufManager extends BaseClass {
      * 序列化
      * @param {message} messageClass message类
      * @param {object} message 验证消息
-     * @param {Buffer} 二进制序列化数据
+     * @return {Buffer} 二进制序列化数据
      */
     encode(messageClass, message) {
         return messageClass.encode(message).finish();
@@ -47,7 +47,7 @@ class ProtobufManager extends BaseClass {
      * 反序列化
      * @param {message} messageClass message类
      * @param {object} message  验证消息
-     * @param {object} 数据对象
+     * @return {object} 数据对象
      */
     decode(messageClass, buffer) {
         return messageClass.decode(buffer).finish();

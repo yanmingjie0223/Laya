@@ -27,7 +27,8 @@ class StringUtils extends BaseClass {
             let s = strArr[i];
             if (this.isChinese(s)) {
                 length += 2;
-            } else {
+            } 
+            else {
                 length += 1;
             }
         }
