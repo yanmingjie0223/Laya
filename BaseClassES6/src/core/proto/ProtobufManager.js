@@ -13,8 +13,14 @@ class ProtobufManager extends BaseClass {
      * @param {string} messageName 消息类名
      * @param {Funtion} callback 回调函数
      * @param {any} thisObj this对象
+     * for example:
+     * let MessageClass = App.ProtobufManager.getMessageClass(protoUrl, messageName, callback, thisObj);
+     * let message = MessageClass.create({
+     *      name: "",
+     *      age : 10
+     * });
      */
-    getMessage(protoUrl, messageName, callback, thisObj = null) {
+    getMessageClass(protoUrl, messageName, callback, thisObj = null) {
         let protobuf = Laya.Browser.window.protobuf;
         protobuf.load(protoUrl, (err, root) => {
             if (err) throw err;
@@ -27,6 +33,8 @@ class ProtobufManager extends BaseClass {
      * 消息验证
      * @param {message} messageClass message类
      * @param {object} message 验证消息
+     * for example:
+     * App.ProtobufManager.verify(MessageClass, message);
      */
     verify(messageClass, message) {
         var errMsg = messageClass.verify(message);
@@ -38,6 +46,8 @@ class ProtobufManager extends BaseClass {
      * @param {message} messageClass message类
      * @param {object} message 验证消息
      * @return {Buffer} 二进制序列化数据
+     * for example:
+     * let messageBuffer = App.ProtobufManager.encode(MessageClass, message);
      */
     encode(messageClass, message) {
         return messageClass.encode(message).finish();
@@ -48,6 +58,8 @@ class ProtobufManager extends BaseClass {
      * @param {message} messageClass message类
      * @param {object} message  验证消息
      * @return {object} 数据对象
+     * for example:
+     * let message = App.ProtobufManager.encode(MessageClass, messageBuffer);
      */
     decode(messageClass, buffer) {
         return messageClass.decode(buffer).finish();
