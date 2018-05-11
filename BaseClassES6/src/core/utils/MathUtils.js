@@ -139,5 +139,51 @@ class MathUtils extends BaseClass {
         return point;
     }
 
+    /**
+     * [0-1]区间获取三次贝塞尔曲线上某点坐标
+     * @param {Point} p0 起点
+     * @param {Point} p1 控制点
+     * @param {Point} p2 控制点
+     * @param {Point} p3 终点
+     * @param {number} t [0-1]区间
+     * @param {Point} 缓存的点对象，如不存在则生成新的点对象
+     * @return {Laya.Point}
+     * */
+    getBezier3Point(p0, p1, p2, p3, t, point = null) {
+        if (!point) {
+            point = new Laya.Point();
+        }
+        let cx = 3 * (p1.x - p0.x);
+        let bx = 3 * (p2.x - p1.x) - cx;
+        let ax = p3.x - p0.x - cx - bx;
+        let cy = 3 * (p1.y - p0.y);
+        let by = 3 * (p2.y - p1.y) - cy;
+        let ay = p3.y - p0.y - cy - by;
+        point.x = ax * t * t * t + bx * t * t + cx * t + p0.x;
+        point.y = ay * t * t * t + by * t * t + cy * t + p0.y;
+        return point;
+    }
+
+    /**
+     * [0-1]区间获取三次贝塞尔曲线点切线角度
+     * @param {Point} p0起点
+     * @param {Point} p1控制点
+     * @param {Point} p2控制点
+     * @param {Point} p3终点
+     * @param {number} t [0-1]区间
+     * @return {number}
+     * */
+    getBezier3CutAngle(p0, p1, p2, p3, t) {
+        let _x = p0.x * 3 * (1 - t) * (1 - t) * (-1) +
+                3 * p1.x * ((1 - t) * (1 - t) + t * 2 * (1 - t) * (-1)) +
+                3 * p2.x * (2 * t * (1 - t) + t * t * (-1)) +
+                p3.x * 3 * t * t;
+        let _y = p0.y * 3 * (1 - t) * (1 - t) * (-1) +
+                3 * p1.y * ((1 - t) * (1 - t) + t * 2 * (1 - t) * (-1)) +
+                3 * p2.y * (2 * t * (1 - t) + t * t * (-1)) +
+                p3.y * 3 * t * t;
+        let angle = this.getAngle( Math.atan2(_y, _x) );
+        return angle;
+    }
 
 }
