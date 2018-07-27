@@ -122,7 +122,7 @@ class EffectUtils extends BaseClass {
         sp.off(Laya.Event.MOUSE_DOWN, this, this.cubicInOutEffect);
         sp.on(Laya.Event.MOUSE_DOWN, this, this.cubicInOutEffect, [sp, isChangeXY]);
     }
-    clearClickEffect() {
+    clearClickEffect(sp) {
         if (!sp) return;
         sp.off(Laya.Event.MOUSE_DOWN, this, this.cubicInOutEffect);
     }

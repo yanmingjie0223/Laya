@@ -10,7 +10,7 @@ class DisplayUtils extends BaseClass {
     }
 
     /**
-     * 创建一个文本
+     * 创建一个Sprite容器
      * @param {number} xPos x坐标
      * @param {number} yPos y坐标
      * @param {Sprite} parent 父容器
