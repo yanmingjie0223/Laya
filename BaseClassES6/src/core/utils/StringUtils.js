@@ -84,4 +84,53 @@ class StringUtils extends BaseClass {
         return uCodeStr;
     }
 
+    /**
+     * 指定截取字符长度，返回截取后的显示字符
+     *
+     * @param {string} str
+     * @param {number} cutNum
+     * @returns {string}
+     */
+    cutOutStr(str, cutNum) {
+        const reg = /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g;
+        let len = 0;
+        let index = 0;
+        for (let i = 0; i < str.length; i++) {
+            const code = str.charCodeAt(i).toString(16);
+            let oldLen = len;
+            let oldIndex = index;
+            // 计算长度和当前字符串下标
+            if (code.length > 2) {
+                len += 2;
+            }
+            else {
+                len += 1;
+            }
+            ++index;
+
+            // 判断emoji表情，一个emoji表现显示空间当做2个（实际是4个字符）
+            if (reg.test(str.substr(i, 2))) {
+                ++i;
+                ++index;
+            }
+
+            // 和截取长度判断
+            if (len > cutNum) {
+                index = oldIndex;
+                len = oldLen;
+                break;
+            }
+            else if (len == cutNum) {
+                break;
+            }
+        }
+
+        let retStr = str.substr(0, index);
+        if (index < str.length) {
+            retStr = retStr + '...';
+        }
+
+        return retStr;
+    }
+
 }
