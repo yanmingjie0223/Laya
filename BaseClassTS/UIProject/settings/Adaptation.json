@@ -1,0 +1,14 @@
+{
+  "scaleMode": "ConstantPixelSize",
+  "screenMathMode": "MatchWidthOrHeight",
+  "designResolutionX": 750,
+  "designResolutionY": 1334,
+  "devices": [
+    {
+      "name": "iPhone X",
+      "resolutionX": 2436,
+      "resolutionY": 1125
+    }
+  ],
+  "fileName": "Adaptation"
+}

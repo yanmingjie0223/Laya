@@ -1,0 +1,33 @@
+{
+	// An array of language ids which should be validated by ESLint
+	"eslint.validate": [
+		"javascript",
+		"typescript",
+	],
+	"editor.codeActionsOnSave": {
+		"source.organizeImports": "explicit"
+	},
+	"editor.tabSize": 4,
+
+	"fileheader.tpl": "/* \r\n * @Author: {author}\r\n * @Date: {createTime}\r\n * @Last Modified by: {lastModifiedBy}\r\n * @Last Modified time: {updateTime}\r\n */\r\n",
+	// When enabled, will trim trailing whitespace when saving a file.
+	"files.trimTrailingWhitespace": true,
+
+	// typescript auto-format settings
+	"typescript.tsdk": "node_modules/typescript/lib",
+	"javascript.preferences.importModuleSpecifier": "project-relative",
+	"typescript.preferences.importModuleSpecifier": "project-relative",
+	"javascript.preferences.quoteStyle": "single",
+	"typescript.preferences.quoteStyle": "single",
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	// make the .shot files from jest-specific-snapshot act like normal snapshots
+	"files.associations": {
+	  "*.json": "jsonc"
+	},
+	"files.exclude": {
+		"**/*.meta": true
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features"
+	},
+}

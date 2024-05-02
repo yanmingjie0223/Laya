@@ -1,0 +1,1 @@
+wx.loadSubpackage({name:'bundle',fail:()=>{wx.exitMiniProgram()}});

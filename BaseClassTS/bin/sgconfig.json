@@ -1,0 +1,11 @@
+{
+	"isInternet": false,
+	"isDebug": true,
+	"isPay": true,
+	"useWebp": false,
+	"useWebpFilter": [],
+	"version": "v1.0.0",
+	"basePath": "",
+	"nameServer": "",
+	"servers": []
+}

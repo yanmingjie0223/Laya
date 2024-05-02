@@ -1,0 +1,17 @@
+{
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"compilerOptions": {
+		"module": "es6",
+		"target": "es6",
+		"sourceMap": true,
+		"baseUrl": "../libs",
+		"outDir": "../build/src",
+		"noEmitOnError": false,
+		"emitDecoratorMetadata": true,
+		// "strict": true,
+		"experimentalDecorators": true,
+		"lib": ["DOM", "ESNext.BigInt", "ES2017"]
+	},
+	"references": [{ "path": "../libs" }],
+	"exclude": ["../node_modules", "../packages"]
+}

@@ -1,0 +1,12 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Launch Chrome",
+			"request": "launch",
+			"type": "pwa-chrome",
+			"url": "http://127.0.0.1:8900/bin/indexmodule.html",
+			"webRoot": "${workspaceFolder}"
+		}
+	]
+}

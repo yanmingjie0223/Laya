@@ -1,0 +1,21 @@
+{
+  "name": "wabpack",
+  "version": "1.0.0",
+  "description": "this a typescript",
+  "main": "index.ts",
+  "dependencies": {
+    "json-loader": "^0.5.4",
+    "reflect-metadata": "^0.1.12",
+    "ts-loader": "^1.3.3",
+    "typescript": "^2.8.3",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^3.1.14"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack -w",
+    "server": "webpack-dev-server"
+  },
+  "author": "",
+  "license": "ISC"
+}
